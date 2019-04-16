@@ -12,9 +12,18 @@ import { LogingButton } from "react-native-fbsdk";
 import {
   createBottomTabNavigator,
   createAppContainer,
-  createSwitchNavigator
+  createSwitchNavigator,
+  createStackNavigator
 } from "react-navigation";
-import { RNCamera } from "react-native-camera";
+
+import Authentication from "./src/Screens/Authentication";
+
+const AuthStack = createStackNavigator({
+  Authentication: {
+    screen: Authentication
+  }
+});
+
 class Test1 extends Component {
   render() {
     return (
@@ -40,9 +49,16 @@ const tab = createBottomTabNavigator({
 });
 
 const AppContainer = createAppContainer(
-  createSwitchNavigator({
-    App: tab
-  })
+  createSwitchNavigator(
+    {
+      Loading: Loading,
+      App: tab,
+      Auth: AuthStack
+    },
+    {
+      initialRouteName: "Auth"
+    }
+  )
 );
 type Props = {};
 export default class App extends Component<Props> {
