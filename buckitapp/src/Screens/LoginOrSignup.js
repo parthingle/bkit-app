@@ -1,13 +1,16 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
 // create a component
 class LoginOrSignup extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>LoginOrSignup</Text>
+                <Button
+                    title="Go to Loading"
+                    onPress={() => this.props.navigation.navigate("Loading")}
+                />
             </View>
         );
     }

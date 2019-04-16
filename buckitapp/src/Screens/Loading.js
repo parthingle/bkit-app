@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
 // create a component
 class Loading extends Component {
@@ -8,6 +8,17 @@ class Loading extends Component {
         return (
             <View style={styles.container}>
                 <Text>Loading</Text>
+                <Text>Check local storage for token;</Text>
+                <Text>forward to "App" if token is present;</Text>
+                <Text>"Auth" otherwise</Text>
+                <Button
+                    title="Go to Auth"
+                    onPress={() => this.props.navigation.navigate("Auth")}
+                />
+                <Button
+                    title="Go to App"
+                    onPress={() => this.props.navigation.navigate("App")}
+                />
             </View>
         );
     }
@@ -19,7 +30,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#2c3e50',
+        backgroundColor: '#F5FCFF',
     },
 });
 
