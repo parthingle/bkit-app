@@ -15,6 +15,12 @@ import {
   createStackNavigator
 } from "react-navigation";
 
+/* Screen Imports */
+import LoginOrSignup from './src/Screens/LoginOrSignup'
+import Explore from './src/Screens/Explore'
+import Home from './src/Screens/Home'
+import Camera from './src/Screens/Camera'
+
 const AuthStack = createStackNavigator({
   LoginOrSignup: {
     screen: LoginOrSignup,
@@ -45,6 +51,7 @@ const AppTab = createBottomTabNavigator({
 
 const AppContainer = createAppContainer(
   createSwitchNavigator({
+    Auth: AuthStack,
     App: AppTab
   })
 );
