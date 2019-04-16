@@ -7,14 +7,19 @@
  */
 
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
-import { LogingButton } from "react-native-fbsdk";
+import { StyleSheet, Text, View } from "react-native";
 import {
   createBottomTabNavigator,
   createAppContainer,
-  createSwitchNavigator
+  createSwitchNavigator,
+  createStackNavigator
 } from "react-navigation";
 
+const AuthStack = createStackNavigator({
+  LoginOrSignup: {
+    screen: LoginOrSignup,
+  }
+})
 const AppTab = createBottomTabNavigator({
   Explore: {
     screen: Explore,
