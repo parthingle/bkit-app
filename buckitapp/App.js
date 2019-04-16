@@ -14,38 +14,37 @@ import {
   createAppContainer,
   createSwitchNavigator
 } from "react-navigation";
-import { RNCamera } from "react-native-camera";
-class Test1 extends Component {
-  render() {
-    return (
-      <View style={{ flex: 1 }}>
-        <Text>Tab 1</Text>
-      </View>
-    );
-  }
-}
 
-class Test2 extends Component {
-  render() {
-    return (
-      <View style={{ flex: 1 }}>
-        <Text>Tab 2</Text>
-      </View>
-    );
-  }
-}
-const tab = createBottomTabNavigator({
-  tab1: Test1,
-  tab2: Test2
+const AppTab = createBottomTabNavigator({
+  Explore: {
+    screen: Explore,
+    navigationOptions: {
+      tabBarLabel: "Explore"
+    }
+  },
+  Home: {
+    screen: Home,
+    navigationOptions: {
+      tabBarLabel: "Home"
+    }
+  },
+  Camera: {
+    screen: Camera,
+    navigationOptions: {
+      tabBarLabel: "Camera"
+    }
+  },
+},{
+  initialRoute: "Home"
 });
 
 const AppContainer = createAppContainer(
   createSwitchNavigator({
-    App: tab
+    App: AppTab
   })
 );
-type Props = {};
-export default class App extends Component<Props> {
+
+export default class App extends Component {
   render() {
     return <AppContainer />;
   }
