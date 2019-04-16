@@ -9,15 +9,40 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import { LogingButton } from 'react-native-fbsdk'
+import { createBottomTabNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation'
 
+class Test1 extends Component {
+  render(){
+    return(
+      <View style={{flex:1}}>
+          <Text>Tab 1</Text>
+      </View>
+    )
+  }
+}
 
+class Test2 extends Component {
+  render(){
+    return(
+      <View style={{flex:1}}>
+          <Text>Tab 2</Text>
+      </View>
+    )
+  }
+}
+const tab = createBottomTabNavigator({
+  tab1: Test1,
+  tab2: Test2
+})
+
+const AppContainer = createAppContainer(createSwitchNavigator({
+  App:tab
+}))
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Test</Text>
-      </View>
+      <AppContainer/>
     );
   }
 }
