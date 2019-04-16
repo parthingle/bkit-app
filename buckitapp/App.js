@@ -12,10 +12,12 @@ import {
   createBottomTabNavigator,
   createAppContainer,
   createSwitchNavigator,
-  createStackNavigator
+  createStackNavigator,
+  SafeAreaView
 } from "react-navigation";
 
 /* Screen Imports */
+import Loading from './src/Screens/Loading'
 import LoginOrSignup from './src/Screens/LoginOrSignup'
 import Explore from './src/Screens/Explore'
 import Home from './src/Screens/Home'
@@ -25,6 +27,8 @@ const AuthStack = createStackNavigator({
   LoginOrSignup: {
     screen: LoginOrSignup,
   }
+},{
+  headerMode: 'none'
 })
 const AppTab = createBottomTabNavigator({
   Explore: {
@@ -45,12 +49,13 @@ const AppTab = createBottomTabNavigator({
       tabBarLabel: "Camera"
     }
   },
-},{
-  initialRoute: "Home"
-});
+}, {
+    initialRoute: "Home"
+  });
 
 const AppContainer = createAppContainer(
   createSwitchNavigator({
+    Loading: Loading,
     Auth: AuthStack,
     App: AppTab
   })
@@ -58,7 +63,13 @@ const AppContainer = createAppContainer(
 
 export default class App extends Component {
   render() {
-    return <AppContainer />;
+    return (
+      // SafeAreaView gives you that extra space at the top so you don't interfere with the iPhone X notch.
+      // We can tinker with it to appear better than it does rn
+      <SafeAreaView style={{ backgroundColor: '#F3F4F8', flex: 1 }} forceInset={{ bottom: 'never' }}>
+        <AppContainer />
+      </SafeAreaView>
+    )
   }
 }
 
