@@ -1,0 +1,3 @@
+rootProject.name = 'buckitapp'
+
+include ':app'
