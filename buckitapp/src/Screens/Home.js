@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
+import PullUpTab from "./List/PullUpTab";
+
 class Home extends Component {
     render() {
         return (
             <View style={styles.container}>
                 <Text>Home Page!</Text>
+                <PullUpTab></PullUpTab>
             </View>
         );
     }
