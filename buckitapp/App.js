@@ -8,7 +8,7 @@
 
 import React, { Component } from "react";
 import { Platform, StyleSheet, Text, View } from "react-native";
-import { LogingButton } from "react-native-fbsdk";
+import { LoginButton } from "react-native-fbsdk";
 import {
   createBottomTabNavigator,
   createAppContainer,
@@ -17,6 +17,7 @@ import {
 } from "react-navigation";
 
 import Authentication from "./src/Screens/Authentication";
+import Loading from "./src/Screens/Loading";
 
 const AuthStack = createStackNavigator({
   Authentication: {
@@ -56,7 +57,7 @@ const AppContainer = createAppContainer(
       Auth: AuthStack
     },
     {
-      initialRouteName: "Auth"
+      initialRouteName: "Loading"
     }
   )
 );
