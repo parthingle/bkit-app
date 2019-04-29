@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import BottomDrawer from 'rn-bottom-drawer';
 import PullUpTab from "./List/PullUpTab";
+
+const { width, height } = Dimensions.get('window')
 
 class Home extends Component {
     render() {
