@@ -48,6 +48,7 @@ class Home extends Component {
         <BottomDrawer
           containerHeight={height}
           downDisplay={height/2}
+          backgroundColor={'#F9F9F9'}
           offset={TAB_BAR_HEIGHT + HEADER_HEIGHT}
           onExpanded = {() => {console.log('expanded')}}
           onCollapsed = {() => {console.log('collapsed')}}
@@ -69,9 +70,6 @@ const styles = StyleSheet.create({
   },
   bottomdrawer: {
     backgroundColor: '#F5FCAA'
-  },
-  date: {
-    backgroundColor: '#F5FDBA'
   },
   contentContainer: {
     flex: 1,
