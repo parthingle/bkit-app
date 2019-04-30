@@ -19,11 +19,16 @@ import {
 import Authentication from "./src/Screens/Authentication";
 import Loading from "./src/Screens/Loading";
 
-const AuthStack = createStackNavigator({
-  Authentication: {
-    screen: Authentication
+const AuthStack = createStackNavigator(
+  {
+    Authentication: {
+      screen: Authentication
+    }
+  },
+  {
+    headerMode: "none"
   }
-});
+);
 
 class Test1 extends Component {
   render() {
