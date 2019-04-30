@@ -12,25 +12,6 @@ class Home extends Component {
     // let pic = {
     //   uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
     // };
-    // return(
-    //   <ScrollView horizontal={true}>
-    //     <TouchableOpacity>
-    //       <View style={styles.bottomdrawer}>
-    //         <Text>Pull Up Tab:</Text>
-    //         {/* <View>
-    //           <Image source={pic} style={{width: 110, height: 110}}/>
-    //           <Text>Impale banana on spiky tree outside bplate</Text>
-    //         </View> */}
-    //       </View>
-    //       <View style={styles.date}><Text>Today</Text></View>
-    //       <View style={styles.date}><Text>Today</Text></View>
-    //       <View style={styles.date}><Text>Today</Text></View>
-    //       <View style={styles.date}><Text>Today</Text></View>
-    //       <View style={styles.date}><Text>Today</Text></View>
-    //       <View style={styles.date}><Text>Today</Text></View>
-    //     </TouchableOpacity>
-    //   </ScrollView>
-    // )
     return (
       <View style={styles.contentContainer}>
         <Text style={styles.text}>Get directions to your location</Text>
