@@ -10,9 +10,7 @@ import {
 import BottomDrawer from "rn-bottom-drawer";
 import LoadingBar from "../Components/LoadingBar";
 
-const { width, height } = Dimensions.get("window");
-const TAB_BAR_HEIGHT = 49;
-const HEADER_HEIGHT = 60;
+const { width, height } = Dimensions.get('window');
 
 class Home extends Component {
   renderContent = () => {
@@ -38,7 +36,6 @@ class Home extends Component {
           containerHeight={height}
           downDisplay={height / 2}
           backgroundColor={"#F9F9F9"}
-          offset={TAB_BAR_HEIGHT + HEADER_HEIGHT}
           onExpanded={() => {
             console.log("expanded");
           }}
