@@ -10,6 +10,7 @@ import React, { Component } from "react";
 import Loading from "./src/Screens/Onboarding/Loading";
 import MainNavigator from "./src/MainNavigator";
 import SignUp from "./src/Screens/Onboarding/SignUp";
+import { StyleSheet } from "react-native";
 
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
