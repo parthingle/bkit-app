@@ -4,26 +4,41 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  Image,
-  Button
 } from "react-native";
 import BottomDrawer from "rn-bottom-drawer";
 import LoadingBar from "../Components/LoadingBar";
+import { ListItem } from 'react-native-elements'
 
-const { width, height } = Dimensions.get('window');
+const {height} = Dimensions.get('window');
+
+const list = [
+  {
+    name: 'Amy Farha',
+    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+    subtitle: 'Vice President'
+  },
+  {
+    name: 'Chris Jackson',
+    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+    subtitle: 'Vice Chairman'
+  }
+]
 
 class Home extends Component {
   renderContent = () => {
-    // let pic = {
-    //   uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
-    // };
     return (
       <View style={styles.contentContainer}>
-        <Text style={styles.text}>Get directions to your location</Text>
-        <View style={styles.buttonContainer}>
-          <Button title="first button" />
-          <Button title="second button" />
-        </View>
+        {
+          list.map((l, i) => (
+            <ListItem style={styles.listItem}
+              key={i}
+              leftAvatar={{ source: { uri: l.avatar_url } }}
+              title={l.name}
+              subtitle={l.subtitle}
+              checkmark={true}
+            />
+          ))
+        }
       </View>
     );
   };
@@ -33,8 +48,8 @@ class Home extends Component {
         <Text>Home Page!</Text>
         <LoadingBar />
         <BottomDrawer
-          containerHeight={height}
           downDisplay={height / 2}
+          containerHeight={height * .96}
           backgroundColor={"#F9F9F9"}
           onExpanded={() => {
             console.log("expanded");
@@ -59,18 +74,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5FCFF"
   },
   bottomdrawer: {
-    backgroundColor: "#F5FCAA"
+    backgroundColor: "#F9F9F9"
+  },
+  listItem: {
+    flexDirection: "row",
+    flex: 1,
+    height: 5,
+    backgroundColor: "#FEFDF4"
   },
   contentContainer: {
+    flexDirection: "column",
     flex: 1,
     alignItems: "center",
-    justifyContent: "space-around"
-  },
-  buttonContainer: {
-    flexDirection: "row"
-  },
-  text: {
-    paddingHorizontal: 5
+    backgroundColor: "#F2F2F2"
+    // justifyContent: "space-around"
   }
 });
 
