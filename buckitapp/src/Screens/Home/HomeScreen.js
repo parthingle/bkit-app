@@ -41,13 +41,13 @@ class HomeScreen extends Component {
         <LoadingBar />
         <BottomDrawer
           downDisplay={height / 2}
-          containerHeight={height * 0.96}
+          containerHeight={height}
           backgroundColor={"#F9F9F9"}
           startUp={false}
         >
           <View style={styles.contentContainer}>
             {list.map((l, i) => (
-              <ListItem
+              <ListItem style={styles.listItem}
                 key={i}
                 leftElement={
                   <Image
@@ -78,10 +78,13 @@ const styles = StyleSheet.create({
   bottomdrawer: {
     backgroundColor: "#F9F9F9"
   },
+  listItem: {
+    marginTop: 10.29
+  },
   contentContainer: {
     flexDirection: "column",
     flex: 1,
-    backgroundColor: "#F2F2F2"
+    backgroundColor: "#F2F2F2",
   }
 });
 
