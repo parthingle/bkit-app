@@ -1,5 +1,5 @@
 import BlankScreen from "./Screens/BlankScreen";
-import Home from "./Screens/Home";
+import Home from "./Screens/HomeNavigator";
 import { createBottomTabNavigator } from "react-navigation";
 import Settings from "./Screens/Settings";
 
