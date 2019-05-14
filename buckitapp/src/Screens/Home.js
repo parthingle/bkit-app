@@ -30,7 +30,7 @@ class Home extends Component {
       <View style={styles.contentContainer}>
         {
           list.map((l, i) => (
-            <ListItem style={styles.listItem}
+            <ListItem
               key={i}
               leftAvatar={{ source: { uri: l.avatar_url } }}
               title={l.name}
@@ -76,16 +76,14 @@ const styles = StyleSheet.create({
   bottomdrawer: {
     backgroundColor: "#F9F9F9"
   },
-  listItem: {
-    flexDirection: "row",
-    flex: 1,
-    height: 5,
-    backgroundColor: "#FEFDF4"
-  },
+  // listItem: {
+  //   flex: 1,
+  //   height: 200,
+  //   backgroundColor: "#FEFDF4"
+  // },
   contentContainer: {
     flexDirection: "column",
     flex: 1,
-    alignItems: "center",
     backgroundColor: "#F2F2F2"
     // justifyContent: "space-around"
   }
