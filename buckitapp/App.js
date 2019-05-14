@@ -43,7 +43,7 @@ const AppContainer = createAppContainer(
       }
     },
     {
-      initialRouteName: "Login"
+      initialRouteName: "Main"
     }
   )
 );

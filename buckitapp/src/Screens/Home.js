@@ -1,44 +1,40 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import BottomDrawer from "rn-bottom-drawer";
 import LoadingBar from "../Components/LoadingBar";
-import { ListItem } from 'react-native-elements'
+import Graph from "../Components/Graph";
+import { ListItem } from "react-native-elements";
 
-const {height} = Dimensions.get('window');
+const { height } = Dimensions.get("window");
 
 const list = [
   {
-    name: 'Amy Farha',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-    subtitle: 'Vice President'
+    name: "Amy Farha",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+    subtitle: "Vice President"
   },
   {
-    name: 'Chris Jackson',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-    subtitle: 'Vice Chairman'
+    name: "Chris Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subtitle: "Vice Chairman"
   }
-]
+];
 
 class Home extends Component {
   renderContent = () => {
     return (
       <View style={styles.contentContainer}>
-        {
-          list.map((l, i) => (
-            <ListItem
-              key={i}
-              leftAvatar={{ source: { uri: l.avatar_url } }}
-              title={l.name}
-              subtitle={l.subtitle}
-              checkmark={true}
-            />
-          ))
-        }
+        {list.map((l, i) => (
+          <ListItem
+            key={i}
+            leftAvatar={{ source: { uri: l.avatar_url } }}
+            title={l.name}
+            subtitle={l.subtitle}
+            checkmark={true}
+          />
+        ))}
       </View>
     );
   };
@@ -46,10 +42,13 @@ class Home extends Component {
     return (
       <View style={styles.container}>
         <Text>Home Page!</Text>
-        <LoadingBar />
+        <View style={styles.headerContainer}>
+          <LoadingBar style={{ height: 30 }} />
+        </View>
+        <Graph />
         <BottomDrawer
           downDisplay={height / 2}
-          containerHeight={height * .96}
+          containerHeight={height * 0.96}
           backgroundColor={"#F9F9F9"}
           onExpanded={() => {
             console.log("expanded");
@@ -67,11 +66,17 @@ class Home extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  headerContainer: {
+    top: -20,
+    paddingTop: 50,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5FCFF"
+    backgroundColor: "#FEFDF4"
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "#CBEDED"
   },
   bottomdrawer: {
     backgroundColor: "#F9F9F9"
