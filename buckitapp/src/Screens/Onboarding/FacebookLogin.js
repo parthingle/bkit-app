@@ -16,16 +16,14 @@ export default class FacebookLogin extends Component {
   }
 
   async authFacebook() {
-    console.log("hitting auth2");
     const data = await AccessToken.getCurrentAccessToken();
-    const access_token = data.accessToken;
-    if (!access_token) {
+    console.log("authFacebook");
+    if (!data) {
       // No access token, wait for Facebook login
-      console.log("no fb access token");
+      console.log("no access token, waiting for Facebook login");
       return;
-    } else {
-      console.log("yes access token => lets hit api");
     }
+    const access_token = data.accessToken;
 
     // TODO: globalize the instance
     const instance = axios.create({
@@ -34,6 +32,8 @@ export default class FacebookLogin extends Component {
     const params = { access_token };
 
     try {
+      console.log("GET /auth/facebook");
+      console.log(params);
       const res = await instance.get("/auth/facebook", { params });
       if (res.status === 202) {
         // User does not exist: sending to sign up page
@@ -54,8 +54,9 @@ export default class FacebookLogin extends Component {
   }
 
   componentDidMount() {
-    this.authFacebook();
+    //this.authFacebook();
     console.log("FacebookLogin");
+    this.authFacebook();
   }
 
   onLoginFinished(error, result) {
@@ -70,35 +71,54 @@ export default class FacebookLogin extends Component {
 
   render() {
     return (
-      <View>
-        <Text style={styles.messageBoxTitleText}>Authenticate yourself!</Text>
-        <LoginButton onLoginFinished={this.onLoginFinished} />
+      <View style={{ flex: 1, backgroundColor: "#FEFDF4" }}>
+        <Text style={styles.titleText}>buckit</Text>
+        <View style={styles.buttonBox}>
+          <LoginButton onLoginFinished={this.onLoginFinished} />
+        </View>
+        <View style={[styles.box, styles.box1]} />
+        <View style={[styles.box, styles.box2]} />
+        <View style={[styles.box, styles.box3]} />
       </View>
     );
   }
 }
 
 var styles = StyleSheet.create({
-  // …
-
-  messageBox: {
-    backgroundColor: "#ef553a",
-    width: 300,
-    paddingTop: 10,
-    paddingBottom: 20,
-    paddingLeft: 20,
-    paddingRight: 20,
-    borderRadius: 10
-  },
-  messageBoxTitleText: {
-    fontWeight: "bold",
-    color: "#fff",
+  titleText: {
+    top: 30,
+    fontFamily: "Pacifico",
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fontSize: 65,
     textAlign: "center",
-    fontSize: 20,
-    marginBottom: 10
+    lineHeight: 114,
+    color: "#67B4B0"
   },
-  messageBoxBodyText: {
-    color: "#fff",
-    fontSize: 16
+  buttonBox: {
+    top: 300,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  centerBox: {
+    position: "relative"
+  },
+  box: {
+    height: 70,
+    width: "100%",
+    left: 0,
+    position: "absolute"
+  },
+  box1: {
+    backgroundColor: "#FFF6C0",
+    bottom: 140
+  },
+  box2: {
+    backgroundColor: "#FEDBA6",
+    bottom: 70
+  },
+  box3: {
+    backgroundColor: "#FDB17F",
+    bottom: 0
   }
 });
