@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
+import Logo from "../../Components/Logo";
 import FBSDK from "react-native-fbsdk";
+import Bars from "../../Components/Bars";
 import * as axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
 
@@ -72,29 +74,17 @@ export default class FacebookLogin extends Component {
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: "#FEFDF4" }}>
-        <Text style={styles.titleText}>buckit</Text>
+        <Logo style={{ top: 30 }} />
         <View style={styles.buttonBox}>
           <LoginButton onLoginFinished={this.onLoginFinished} />
         </View>
-        <View style={[styles.box, styles.box1]} />
-        <View style={[styles.box, styles.box2]} />
-        <View style={[styles.box, styles.box3]} />
+        <Bars />
       </View>
     );
   }
 }
 
 var styles = StyleSheet.create({
-  titleText: {
-    top: 30,
-    fontFamily: "Pacifico",
-    fontStyle: "normal",
-    fontWeight: "normal",
-    fontSize: 65,
-    textAlign: "center",
-    lineHeight: 114,
-    color: "#67B4B0"
-  },
   buttonBox: {
     top: 300,
     justifyContent: "center",
@@ -102,23 +92,5 @@ var styles = StyleSheet.create({
   },
   centerBox: {
     position: "relative"
-  },
-  box: {
-    height: 70,
-    width: "100%",
-    left: 0,
-    position: "absolute"
-  },
-  box1: {
-    backgroundColor: "#FFF6C0",
-    bottom: 140
-  },
-  box2: {
-    backgroundColor: "#FEDBA6",
-    bottom: 70
-  },
-  box3: {
-    backgroundColor: "#FDB17F",
-    bottom: 0
   }
 });

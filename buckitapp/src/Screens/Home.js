@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Dimensions } from "react-native";
 import BottomDrawer from "rn-bottom-drawer";
 import LoadingBar from "../Components/LoadingBar";
 import Graph from "../Components/Graph";
+import Logo from "../Components/Logo";
 import { ListItem } from "react-native-elements";
 
 const { height } = Dimensions.get("window");
@@ -41,9 +42,14 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Home Page!</Text>
         <View style={styles.headerContainer}>
-          <LoadingBar style={{ height: 30 }} />
+          <Logo
+            style={{
+              fontSize: 40,
+              bottom: -15
+            }}
+          />
+          <LoadingBar />
         </View>
         <Graph />
         <BottomDrawer
@@ -68,7 +74,7 @@ class Home extends Component {
 const styles = StyleSheet.create({
   headerContainer: {
     top: -20,
-    paddingTop: 50,
+    paddingTop: 25,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FEFDF4"
