@@ -15,18 +15,18 @@ export default class Graph extends Component {
     this.onShowUnderlay = this.onShowUnderlay.bind(this);
     this.onHideUnderlay = this.onHideUnderlay.bind(this);
     this.data = [
-      { month: "JAN", count: 2, key: 1 },
-      { month: "FEB", count: 0, key: 2 },
-      { month: "MAR", count: 1, key: 3 },
-      { month: "APR", count: 6, key: 4 },
-      { month: "MAY", count: 3, key: 5 },
-      { month: "JUN", count: 7, key: 6 },
-      { month: "JUL", count: 4, key: 7 },
-      { month: "AUG", count: 3, key: 8 },
-      { month: "SEP", count: 9, key: 9 },
-      { month: "OCT", count: 11, key: 10 },
-      { month: "NOV", count: 10, key: 11 },
-      { month: "DEC", count: 2, key: 12 }
+      { month: "JAN", count: 2, key: "JAN" },
+      { month: "FEB", count: 0, key: "FEB" },
+      { month: "MAR", count: 1, key: "MAR" },
+      { month: "APR", count: 6, key: "APR" },
+      { month: "MAY", count: 3, key: "MAY" },
+      { month: "JUN", count: 7, key: "JUN" },
+      { month: "JUL", count: 4, key: "JUL" },
+      { month: "AUG", count: 3, key: "AUG" },
+      { month: "SEP", count: 9, key: "SEP" },
+      { month: "OCT", count: 11, key: "OCT" },
+      { month: "NOV", count: 10, key: "NOV" },
+      { month: "DEC", count: 2, key: "DEC" }
     ].reverse();
   }
 
