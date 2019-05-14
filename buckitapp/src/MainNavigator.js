@@ -1,7 +1,6 @@
 import BlankScreen from "./Screens/BlankScreen";
 import Home from "./Screens/Home";
 import { createBottomTabNavigator } from "react-navigation";
-import FacebookLogin from "./Screens/Onboarding/FacebookLogin";
 import Settings from "./Screens/Settings";
 
 const AppTab = createBottomTabNavigator(

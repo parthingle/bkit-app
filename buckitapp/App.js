@@ -7,13 +7,7 @@
  */
 
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
-import {
-  createBottomTabNavigator,
-  createAppContainer,
-  createSwitchNavigator,
-  createStackNavigator
-} from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
 import Loading from "./src/Screens/Onboarding/Loading";
 import MainNavigator from "./src/MainNavigator";
@@ -43,26 +37,7 @@ const AppContainer = createAppContainer(
       }
     },
     {
-      initialRouteName: "Login"
+      initialRouteName: "Main"
     }
   )
 );
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
-  },
-  instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5
-  }
-});
