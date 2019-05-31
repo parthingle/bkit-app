@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 
-// create a component
-class Loading extends Component {
+export default class BuckitScreen extends Component {
   render() {
     return (
       <View style={styles.container}>

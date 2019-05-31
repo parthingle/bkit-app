@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Text, View } from "react-native";
 
-export default class EnterDetails extends Component {
+export default class BlankScreen extends Component {
   render() {
     return (
       <View>
-        <Text> In Enter Details </Text>
+        <Text>This is a blank screen used for testing.</Text>
       </View>
     );
   }
