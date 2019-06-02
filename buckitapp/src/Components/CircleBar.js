@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#FEFDF4"
+    backgroundColor: "#FFFFFF"
   },
   logo: {
     fontFamily: "Pacifico",

@@ -4,16 +4,19 @@ import { TouchableWithoutFeedback, View, Text } from "react-native";
 const Button = props => (
   <TouchableWithoutFeedback onPress={props.onPress}>
     <View
-      style={{
-        backgroundColor: "#FDB17F",
-        borderRadius: 5,
-        padding: 10,
-        height: 50,
-        width: 130,
-        textAlignment: "center",
-        justifyContent: "center",
-        alignItems: "center"
-      }}
+      style={[
+        {
+          backgroundColor: "#FDB17F",
+          borderRadius: 5,
+          padding: 10,
+          height: 50,
+          width: 130,
+          textAlignment: "center",
+          justifyContent: "center",
+          alignItems: "center"
+        },
+        props.style
+      ]}
     >
       <Text
         style={{
