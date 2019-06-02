@@ -60,17 +60,10 @@ class HomeScreen extends Component {
           roundedEdges={true}
         >
           <View style={styles.bottomDrawerStyle}>
-<<<<<<< Updated upstream
-            <ScrollView
-              contentContainerStyle={{alignItems: "center"}}>
-              {list.map((l, i) => (
-                <ListItem style={styles.listItem}
-=======
             <ScrollView contentContainerStyle={{ alignItems: "center" }}>
               {this.state.items.map((l, i) => (
                 <ListItem
                   style={styles.listItem}
->>>>>>> Stashed changes
                   key={i}
                   leftElement={
                     <Image
