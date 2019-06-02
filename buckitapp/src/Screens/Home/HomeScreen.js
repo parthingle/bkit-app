@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
 import BottomDrawer from "rn-bottom-drawer";
 import LoadingBar from "../../Components/LoadingBar";
+import Logo from "../../Components/Logo";
+import Graph from "../../Components/Graph";
 import { ListItem, Image } from "react-native-elements";
 
 const { height } = Dimensions.get("window");
@@ -36,9 +38,17 @@ const list = [
 class HomeScreen extends Component {
   render() {
     return (
-      <View style={styles.homeScreenStyle}>
-        <Text>Cool Chris Club</Text>
-        <LoadingBar/>
+      <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <Logo
+            style={{
+              fontSize: 40,
+              bottom: -15
+            }}
+          />
+          <LoadingBar />
+        </View>
+        <Graph />
         <BottomDrawer
           downDisplay={height / 2}
           containerHeight={height}
@@ -47,10 +57,10 @@ class HomeScreen extends Component {
           roundedEdges={true}
         >
           <View style={styles.bottomDrawerStyle}>
-            <ScrollView
-              contentContainerStyle={{alignItems: "center"}}>
+            <ScrollView contentContainerStyle={{ alignItems: "center" }}>
               {list.map((l, i) => (
-                <ListItem style={styles.listItem}
+                <ListItem
+                  style={styles.listItem}
                   key={i}
                   leftElement={
                     <Image
@@ -74,23 +84,34 @@ class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  homeScreenStyle: {
-    flex: 1,
+  headerContainer: {
+    top: -20,
+    paddingTop: 40,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5FCFF"
+    backgroundColor: "#FEFDF4"
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "#CBEDED"
+  },
+  bottomDrawer: {
+    flexDirection: "row",
+    flex: 1,
+    backgroundColor: "#F2F2F2"
   },
   listItem: {
     marginTop: 20,
     flexDirection: "column",
     flex: 1,
     width: "80%",
-    borderRadius: 20,
+    borderRadius: 20
   },
-  bottomDrawerStyle: {
-    flexDirection: "row",
+  contentContainer: {
+    flexDirection: "column",
     flex: 1,
-    backgroundColor: "#F2F2F2",
+    backgroundColor: "#F2F2F2"
   }
 });
 
