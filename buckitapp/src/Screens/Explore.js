@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, View } from "react-native";
 import CircleBar from "../Components/CircleBar";
-import BuckitButton from "../Components/BuckitButton";
+import Button from "../Components/Button";
 
 export default class Explore extends Component {
   render() {
@@ -15,7 +15,7 @@ export default class Explore extends Component {
         <Text>
           {this.props.text || "This is a blank screen used for testing."}
         </Text>
-        <BuckitButton
+        <Button
           title="buck it"
           onPress={() => {
             alert("hi");

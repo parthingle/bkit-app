@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { TouchableWithoutFeedback, View, Text } from "react-native";
 
-const BuckitButton = props => (
+const Button = props => (
   <TouchableWithoutFeedback onPress={props.onPress}>
     <View
       style={{
@@ -26,8 +26,7 @@ const BuckitButton = props => (
         {props.title}
       </Text>
     </View>
-    {/* <Button title={props.title} onPress={props.onPress} /> */}
   </TouchableWithoutFeedback>
 );
 
-export default BuckitButton;
+export default Button;
