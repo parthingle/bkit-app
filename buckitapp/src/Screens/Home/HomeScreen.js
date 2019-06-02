@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
 import BottomDrawer from "rn-bottom-drawer";
 import LoadingBar from "../../Components/LoadingBar";
 import { ListItem, Image } from "react-native-elements";
@@ -36,31 +36,36 @@ const list = [
 class HomeScreen extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.homeScreenStyle}>
         <Text>Cool Chris Club</Text>
-        <LoadingBar />
+        <LoadingBar/>
         <BottomDrawer
           downDisplay={height / 2}
           containerHeight={height}
           backgroundColor={"#F9F9F9"}
           startUp={false}
+          roundedEdges={true}
         >
-          <View style={styles.contentContainer}>
-            {list.map((l, i) => (
-              <ListItem style={styles.listItem}
-                key={i}
-                leftElement={
-                  <Image
-                    source={{ uri: l.avatar_url }}
-                    style={{ width: 80, height: 80 }}
-                  />
-                }
-                title={l.item}
-                subtitle={l.distance}
-                checkmark={true}
-                onPress={() => this.props.navigation.navigate("Buckit")}
-              />
-            ))}
+          <View style={styles.bottomDrawerStyle}>
+            <ScrollView
+              contentContainerStyle={{alignItems: "center"}}>
+              {list.map((l, i) => (
+                <ListItem style={styles.listItem}
+                  key={i}
+                  leftElement={
+                    <Image
+                      source={{ uri: l.avatar_url }}
+                      style={{ width: 80, height: 80 }}
+                    />
+                  }
+                  title={l.item}
+                  // titleStyle={{fontFamily: "SF Pro Text", color: "#767676"}}
+                  subtitle={l.distance}
+                  checkmark={true}
+                  onPress={() => this.props.navigation.navigate("Buckit")}
+                />
+              ))}
+            </ScrollView>
           </View>
         </BottomDrawer>
       </View>
@@ -69,20 +74,21 @@ class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  homeScreenStyle: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF"
   },
-  bottomdrawer: {
-    backgroundColor: "#F9F9F9"
-  },
   listItem: {
-    marginTop: 10.29
-  },
-  contentContainer: {
+    marginTop: 20,
     flexDirection: "column",
+    flex: 1,
+    width: "80%",
+    borderRadius: 20,
+  },
+  bottomDrawerStyle: {
+    flexDirection: "row",
     flex: 1,
     backgroundColor: "#F2F2F2",
   }
