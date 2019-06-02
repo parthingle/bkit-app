@@ -2,10 +2,21 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 
 export default class BuckitScreen extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      item: null
+    }
+  }
+
+  componentWillMount() {
+    this.setState({item: this.props.navigation.getParam("item")});
+  }
+  
   render() {
     return (
       <View style={styles.container}>
-        <Text>Loading</Text>
+        <Text>{this.state.item.title}</Text>
         <Text>Check local storage for token;</Text>
         <Text>forward to "App" if token is present;</Text>
         <Text>"Auth" otherwise</Text>

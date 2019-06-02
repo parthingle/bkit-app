@@ -1,39 +1,52 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
+import { View, StyleSheet, Dimensions, ScrollView } from "react-native";
 import BottomDrawer from "rn-bottom-drawer";
 import LoadingBar from "../../Components/LoadingBar";
 import { ListItem, Image } from "react-native-elements";
+import Axios from "axios";
 
 const { height } = Dimensions.get("window");
 
-const list = [
-  {
-    item: "Santa Monica Pier",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-    distance: "3.7 miles away"
-  },
-  {
-    item: "Beat 'SC Week",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    distance: "0.2 miles away"
-  },
-  {
-    item: "First Fridays",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-    distance: "7.3 miles away"
-  },
-  {
-    item: "Swimming at Sunset Rec",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    distance: "0.1 miles away"
-  }
-];
-
 class HomeScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      completion: 0.0,
+      items: []
+    }
+  }
+
+  async getBuckitItems() {
+    const instance = Axios.create({
+      baseURL: "http://localhost:8080"
+    });
+    try {
+      console.log("GET /user/home");
+      const res = await instance.get("/user/home");
+      if (res.status === 200) {
+        // Request succeeded
+        console.log("request succeeded");
+
+        alert(JSON.stringify(res.data));
+        this.setState({
+          completion: res.data.completionPercentage,
+          items: res.data.items
+        })
+      }
+      else {
+        // User does not exist: sending to sign up page
+        this.props.navigation.navigate("SignUp");
+        console.log("request failed. nav to signup");
+      }
+    } catch (err) {
+      console.log("/user/home: error");
+    }
+  }
+
+  componentWillMount() {
+    this.getBuckitItems();
+  }
+
   render() {
     return (
       <View style={styles.homeScreenStyle}>
@@ -47,22 +60,31 @@ class HomeScreen extends Component {
           roundedEdges={true}
         >
           <View style={styles.bottomDrawerStyle}>
+<<<<<<< Updated upstream
             <ScrollView
               contentContainerStyle={{alignItems: "center"}}>
               {list.map((l, i) => (
                 <ListItem style={styles.listItem}
+=======
+            <ScrollView contentContainerStyle={{ alignItems: "center" }}>
+              {this.state.items.map((l, i) => (
+                <ListItem
+                  style={styles.listItem}
+>>>>>>> Stashed changes
                   key={i}
                   leftElement={
                     <Image
-                      source={{ uri: l.avatar_url }}
+                      source={{ uri: l.album[0] }}
                       style={{ width: 80, height: 80 }}
                     />
                   }
-                  title={l.item}
+                  title={l.title}
                   // titleStyle={{fontFamily: "SF Pro Text", color: "#767676"}}
                   subtitle={l.distance}
-                  checkmark={true}
-                  onPress={() => this.props.navigation.navigate("Buckit")}
+                  checkmark={l.done ? true : false}
+                  onPress={() => this.props.navigation.navigate("Buckit", {
+                    item: l
+                  })}
                 />
               ))}
             </ScrollView>
