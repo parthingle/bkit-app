@@ -12,7 +12,7 @@ export default class BlankScreen extends Component {
   }
   render() {
     return (
-      <View>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>This is a settings page.</Text>
         <LoginButton onLogoutFinished={this.onLogoutFinished} />
       </View>

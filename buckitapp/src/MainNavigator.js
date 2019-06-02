@@ -1,8 +1,7 @@
-import BlankScreen from "./Screens/BlankScreen";
-import Home from "./Screens/HomeNavigator";
+import Home from "./Screens/Home/HomeScreen";
+import Explore from "./Screens/Explore";
 import { createBottomTabNavigator } from "react-navigation";
 import Settings from "./Screens/Settings";
-
 const AppTab = createBottomTabNavigator(
   {
     Home: {
@@ -12,7 +11,7 @@ const AppTab = createBottomTabNavigator(
       }
     },
     Explore: {
-      screen: BlankScreen,
+      screen: Explore,
       navigationOptions: {
         tabBarLabel: "Explore"
       }
