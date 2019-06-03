@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Text, View, StyleSheet, Dimensions, ScrollView } from "react-native";
 import BottomDrawer from "rn-bottom-drawer";
 import LoadingBar from "../../Components/LoadingBar";
+import Logo from "../../Components/Logo";
+import Graph from "../../Components/Graph";
 import { ListItem, Image } from "react-native-elements";
 import Axios from "axios";
 
@@ -27,7 +29,7 @@ class HomeScreen extends Component {
         // Request succeeded
         console.log("request succeeded");
 
-        alert(JSON.stringify(res.data));
+        // alert(JSON.stringify(res.data));
         this.setState({
           completion: res.data.completionPercentage,
           items: res.data.items
@@ -49,9 +51,17 @@ class HomeScreen extends Component {
 
   render() {
     return (
-      <View style={styles.homeScreenStyle}>
-        <Text>Cool Chris Club</Text>
-        <LoadingBar/>
+      <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <Logo
+            style={{
+              fontSize: 40,
+              bottom: -15
+            }}
+          />
+          <LoadingBar />
+        </View>
+        <Graph />
         <BottomDrawer
           downDisplay={height / 2}
           containerHeight={height}
@@ -75,10 +85,9 @@ class HomeScreen extends Component {
                   // titleStyle={{fontFamily: "SF Pro Text", color: "#767676"}}
                   subtitle={l.distance}
                   checkmark={l.done ? true : false}
-                  // onPress={() => this.props.navigation.navigate("Buckit", {
-                  //   item: l
-                  // })}
-                  onPress = {true}
+                  onPress={() => this.props.navigation.navigate("Buckit", {
+                    item: l
+                  })}
                 />
               ))}
             </ScrollView>
@@ -90,23 +99,34 @@ class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  homeScreenStyle: {
-    flex: 1,
+  headerContainer: {
+    top: -20,
+    paddingTop: 40,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5FCFF"
+    backgroundColor: "#FEFDF4"
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "#CBEDED"
+  },
+  bottomDrawer: {
+    flexDirection: "row",
+    flex: 1,
+    backgroundColor: "#F2F2F2"
   },
   listItem: {
     marginTop: 20,
     flexDirection: "column",
     flex: 1,
     width: "80%",
-    borderRadius: 20,
+    borderRadius: 20
   },
-  bottomDrawerStyle: {
-    flexDirection: "row",
+  contentContainer: {
+    flexDirection: "column",
     flex: 1,
-    backgroundColor: "#F2F2F2",
+    backgroundColor: "#F2F2F2"
   }
 });
 
