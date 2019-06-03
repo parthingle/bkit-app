@@ -1,78 +1,67 @@
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-class Triangle extends Component {
-  render() {
-    return (
-      <View
-        style={[
-          styles.triangle,
-          this.props.left
-            ? { borderLeftColor: this.props.color }
-            : { borderRightColor: this.props.color },
-          this.props.left ? styles.arrowLeft : styles.arrowRight
-        ]}
-      />
-    );
-  }
-}
-class Bar extends Component {
-  render() {
-    return (
-      <View
-        style={[
-          {
-            backgroundColor: this.props.color,
-            height: 70,
-            width: 8
-          },
-          !this.props.left ? { marginRight: -15 } : { marginLeft: -15 }
-        ]}
-      />
-    );
-  }
-}
-export default class Chevron extends Component {
-  render() {
-    return (
-      <View
-        style={{
-          flexDirection: this.props.left ? "row-reverse" : "row"
-        }}
-      >
-        <Triangle color="#FFF6C0" left={this.props.left} />
-        <Bar color="#FFF6C0" left={this.props.left} />
-        <Triangle color="#FEDBA6" left={this.props.left} />
-        <Bar color="#FEDBA6" left={this.props.left} />
-        <Triangle color="#FDB17F" left={this.props.left} />
-      </View>
-    );
-  }
-}
+const Chevron = props => {
+  const styles = getStyles(props);
+  return (
+    <View style={styles.chevron}>
+      <View style={styles.chevronMain} />
+      <View style={[styles.chevronTriangle, styles.chevronTopLeft]} />
+      <View style={[styles.chevronTriangle, styles.chevronTopRight]} />
+      <View style={[styles.chevronTriangle, styles.chevronBottomLeft]} />
+      <View style={[styles.chevronTriangle, styles.chevronBottomRight]} />
+    </View>
+  );
+};
 
-const styles = StyleSheet.create({
-  triangle: {
-    width: 0,
-    height: 0,
-    backgroundColor: "transparent",
-    borderStyle: "solid"
-  },
-  arrowLeft: {
-    borderTopWidth: 35,
-    borderBottomWidth: 35,
-    borderRightWidth: 0,
-    borderLeftWidth: 15,
-    borderTopColor: "transparent",
-    borderBottomColor: "transparent",
-    borderRightColor: "transparent"
-  },
-  arrowRight: {
-    borderTopWidth: 35,
-    borderBottomWidth: 35,
-    borderRightWidth: 15,
-    borderLeftWidth: 0,
-    borderTopColor: "transparent",
-    borderBottomColor: "transparent",
-    borderLeftColor: "transparent"
-  }
-});
+const height = 40;
+const width = 6;
+
+const getStyles = props =>
+  StyleSheet.create({
+    chevron: {
+      width: 0,
+      height: height
+    },
+    chevronMain: {
+      width: 0,
+      height: height,
+      backgroundColor: props.color
+    },
+    chevronTriangle: {
+      backgroundColor: "transparent",
+      borderRightWidth: width,
+      borderBottomWidth: 0,
+      borderLeftWidth: 0,
+      borderTopWidth: height / 2,
+      borderRightColor: "transparent",
+      borderLeftColor: "transparent",
+      borderBottomColor: "transparent",
+      borderTopColor: props.color
+    },
+    chevronTopLeft: {
+      position: "absolute",
+      right: -width,
+      top: 0
+    },
+    chevronTopRight: {
+      position: "absolute",
+      right: -width,
+      bottom: 0,
+      transform: [{ scaleY: -1 }]
+    },
+    chevronBottomLeft: {
+      position: "absolute",
+      left: -width,
+      top: 0,
+      transform: [{ scale: -1 }]
+    },
+    chevronBottomRight: {
+      position: "absolute",
+      left: -width,
+      bottom: 0,
+      transform: [{ scaleX: -1 }]
+    }
+  });
+
+export default Chevron;

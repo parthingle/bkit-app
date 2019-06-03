@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Text, View, Image, ScrollView } from "react-native";
 import CircleBar from "../Components/CircleBar";
 import Button from "../Components/Button";
-import Chevron from "../Components/Chevron";
+import ChevronButton from "../Components/ChevronButton";
 
 export default class Explore extends Component {
   render() {
@@ -37,7 +37,7 @@ export default class Explore extends Component {
             paddingRight: 10
           }}
         >
-          <Text style={{ fontSize: 30 }}>⇦</Text>
+          <ChevronButton onPress={() => alert("back!")} />
           <Text
             style={{
               fontFamily: "Pacifico",

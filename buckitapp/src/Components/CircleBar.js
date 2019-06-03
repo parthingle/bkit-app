@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import Chevron from "../Components/Chevron";
+import Triangles from "../Components/Triangles";
 const maxSize = 5;
 
 export default class Graph extends Component {
@@ -13,13 +13,13 @@ export default class Graph extends Component {
     }
     return (
       <View style={[styles.container, this.props.style]}>
-        <Chevron left={true} />
+        <Triangles left={true} />
         {circles.map((initial, i) => (
           <View key={i} style={styles.circle}>
             <Text style={styles.text}>{initial}</Text>
           </View>
         ))}
-        <Chevron left={false} />
+        <Triangles left={false} />
       </View>
     );
   }
