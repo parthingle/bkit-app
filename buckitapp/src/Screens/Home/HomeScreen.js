@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Dimensions, ScrollView } from "react-native";
+import { Text, View, StyleSheet, Dimensions, ScrollView } from "react-native";
 import BottomDrawer from "rn-bottom-drawer";
 import LoadingBar from "../../Components/LoadingBar";
 import { ListItem, Image } from "react-native-elements";
@@ -75,9 +75,10 @@ class HomeScreen extends Component {
                   // titleStyle={{fontFamily: "SF Pro Text", color: "#767676"}}
                   subtitle={l.distance}
                   checkmark={l.done ? true : false}
-                  onPress={() => this.props.navigation.navigate("Buckit", {
-                    item: l
-                  })}
+                  // onPress={() => this.props.navigation.navigate("Buckit", {
+                  //   item: l
+                  // })}
+                  onPress = {true}
                 />
               ))}
             </ScrollView>
