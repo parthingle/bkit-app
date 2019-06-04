@@ -37,14 +37,14 @@ export default class FacebookLogin extends Component {
       console.log("GET /auth/facebook");
       console.log(params);
       const res = await instance.get("/auth/facebook", { params });
-      if (res.status === 202) {
+      if (res.status === 201) {
         // User does not exist: sending to sign up page
         this.props.navigation.navigate("SignUp");
         console.log("nav to signup");
-      } else if (res.status === 201) {
+      } else if (res.status === 200) {
         // User exists: sending to Main App
         // TODO: load user data
-        await AsyncStorage.setItem("@jwtoken", res.jwtoken);
+        await AsyncStorage.setItem("@jwtoken", res.data.jwtoken);
         this.props.navigation.navigate("Main");
         console.log("nav to main");
       } else {

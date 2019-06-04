@@ -6,42 +6,40 @@ import Logo from "../../Components/Logo";
 import Graph from "../../Components/Graph";
 import { ListItem, Image } from "react-native-elements";
 import Axios from "axios";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const { height } = Dimensions.get("window");
 
 class HomeScreen extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       completion: 0.0,
       items: []
-    }
+    };
   }
 
   async getBuckitItems() {
-    const instance = Axios.create({
-      baseURL: "http://localhost:8080"
-    });
     try {
       console.log("GET /user/home");
+      const jwt = await AsyncStorage.getItem("@jwtoken");
+      const instance = Axios.create({
+        baseURL: "http://localhost:8080",
+        headers: { "x-auth-token": jwt }
+      });
       const res = await instance.get("/user/home");
       if (res.status === 200) {
         // Request succeeded
-        console.log("request succeeded");
-
-        // alert(JSON.stringify(res.data));
         this.setState({
           completion: res.data.completionPercentage,
           items: res.data.items
-        })
-      }
-      else {
+        });
+      } else {
         // User does not exist: sending to sign up page
         this.props.navigation.navigate("SignUp");
-        console.log("request failed. nav to signup");
       }
     } catch (err) {
-      console.log("/user/home: error");
+      console.log("/user/home:", err);
     }
   }
 
@@ -85,9 +83,11 @@ class HomeScreen extends Component {
                   // titleStyle={{fontFamily: "SF Pro Text", color: "#767676"}}
                   subtitle={l.distance}
                   checkmark={l.done ? true : false}
-                  onPress={() => this.props.navigation.navigate("Buckit", {
-                    item: l
-                  })}
+                  onPress={() =>
+                    this.props.navigation.navigate("Buckit", {
+                      item: l
+                    })
+                  }
                 />
               ))}
             </ScrollView>

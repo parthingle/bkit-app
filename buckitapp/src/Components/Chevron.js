@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native";
 const Chevron = props => {
   const styles = getStyles(props);
   return (
-    <View style={styles.chevron}>
+    <View style={[styles.chevron, props.style]}>
       <View style={styles.chevronMain} />
       <View style={[styles.chevronTriangle, styles.chevronTopLeft]} />
       <View style={[styles.chevronTriangle, styles.chevronTopRight]} />
