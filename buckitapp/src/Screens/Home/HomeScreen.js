@@ -84,8 +84,8 @@ class HomeScreen extends Component {
                   title={l.title}
                   // titleStyle={{fontFamily: "SF Pro Text", color: "#767676"}}
                   subtitle={l.distance}
-                  checkmark={l.done ? true : false}
-                  onPress={() => this.props.navigation.navigate("Buckit", {
+                  checkmark={true}
+                  onPress={() => this.props.navigation.navigate("Explore", {
                     item: l
                   })}
                 />

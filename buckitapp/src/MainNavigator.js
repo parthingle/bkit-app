@@ -1,8 +1,8 @@
 import Home from "./Screens/Home/HomeScreen";
 import Explore from "./Screens/Explore";
-import { createBottomTabNavigator } from "react-navigation";
-import Settings from "./Screens/Settings";
-const AppTab = createBottomTabNavigator(
+import { createStackNavigator } from "react-navigation";
+
+const AppTab = createStackNavigator(
   {
     Home: {
       screen: Home,
@@ -15,16 +15,10 @@ const AppTab = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: "Explore"
       }
-    },
-    Camera: {
-      screen: Settings,
-      navigationOptions: {
-        tabBarLabel: "Settings"
-      }
     }
   },
   {
-    initialRoute: "Home"
+    headerMode: "None"
   }
 );
 
