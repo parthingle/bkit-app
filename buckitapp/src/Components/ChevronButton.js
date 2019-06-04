@@ -5,11 +5,14 @@ import Chevron from "../Components/Chevron";
 const ChevronButton = props => (
   <TouchableWithoutFeedback onPress={props.onPress}>
     <View
-      style={{
-        width: 25,
-        flexDirection: "row",
-        justifyContent: "space-evenly"
-      }}
+      style={[
+        {
+          width: 25,
+          flexDirection: "row",
+          justifyContent: "space-evenly"
+        },
+        props.style
+      ]}
     >
       <Chevron color="#FD9268" />
       <Chevron color="#FEDBA6" />

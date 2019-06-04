@@ -11,7 +11,6 @@ export default class Loading extends Component {
       this.props.navigation.navigate("Login");
     } else {
       // Found jwttoken, send to Main App
-      // TODO: load user object
       console.log("Found jwttoken, send to Main App");
       this.props.navigation.navigate("Main");
     }

@@ -37,7 +37,7 @@ const AppContainer = createAppContainer(
       }
     },
     {
-      initialRouteName: "Main"
+      initialRouteName: "Loading"
     }
   )
 );
