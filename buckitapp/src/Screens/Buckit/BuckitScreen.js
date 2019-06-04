@@ -2,17 +2,17 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 
 export default class BuckitScreen extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       item: null
-    }
+    };
   }
 
   componentWillMount() {
-    this.setState({item: this.props.navigation.getParam("item")});
+    this.setState({ item: this.props.navigation.getParam("item") });
   }
-  
+
   render() {
     return (
       <View style={styles.container}>
