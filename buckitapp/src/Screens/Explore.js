@@ -5,20 +5,30 @@ import Button from "../Components/Button";
 import ChevronButton from "../Components/ChevronButton";
 
 export default class Explore extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      item: null
+    }
+  }
+
+  componentWillMount() {
+    this.setState({item: this.props.navigation.getParam("item")});
+  }
+
   render() {
-    const title = "Santa Monica Pier";
+    const title = this.state.item.title;
     const text = [
       [
         "What's the Deal",
-        "Santa Monica Pier is just a ten minute uber ride away from UCLA. Enjoy the sandy breeze as you escape from midterms"
+        this.state.item.content.description
       ],
       [
         "What To Do",
-        " • Watch the sunset\n • Bird around the pier\n • Get some fresh mango"
+        this.state.item.content.thingsToDo
       ]
     ];
-    const uri =
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Santa_monica_pier_entrance_evening.jpg/1200px-Santa_monica_pier_entrance_evening.jpg";
+    const uri = this.state.item.album[0]
     return (
       <View
         style={{ flex: 1, backgroundColor: "#FEFDF4", alignItems: "center" }}
@@ -37,7 +47,7 @@ export default class Explore extends Component {
             paddingRight: 10
           }}
         >
-          <ChevronButton onPress={() => alert("back!")} />
+          <ChevronButton onPress={() => this.props.navigation.navigate("Home")} />
           <Text
             style={{
               fontFamily: "Pacifico",

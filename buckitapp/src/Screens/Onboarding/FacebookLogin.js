@@ -14,6 +14,7 @@ export default class FacebookLogin extends Component {
     constructor(props) {
         super(props);
     }
+
     authFacebook = async () => {
         LoginManager.logInWithReadPermissions(["public_profile"]).then(res => {
             if (res.isCancelled) {
