@@ -8,9 +8,9 @@ const Button = props => (
         {
           backgroundColor: "#FDB17F",
           borderRadius: 5,
-          padding: 10,
+          paddingLeft: 20,
+          paddingRight: 20,
           height: 50,
-          width: 130,
           textAlignment: "center",
           justifyContent: "center",
           alignItems: "center"
@@ -21,7 +21,7 @@ const Button = props => (
       <Text
         style={{
           color: "#FFFFFF",
-          fontFamily: "Arial",
+          fontFamily: "SF Pro Text",
           fontSize: 20,
           letterSpacing: 3
         }}

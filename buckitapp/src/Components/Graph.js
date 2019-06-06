@@ -110,19 +110,18 @@ const styles = StyleSheet.create({
   title: {
     color: "#FD9268",
     fontFamily: "Futura",
-    fontSize: 12
+    fontSize: 15
   },
   text: {
     fontFamily: "Futura",
-    fontSize: 8,
+    fontSize: 11,
     paddingLeft: 3
   },
   bubble: {
-    width: 75,
-    height: 25,
+    padding: 3,
+    minWidth: 70,
     backgroundColor: "rgba(196, 196, 196, 0.34)",
-    borderRadius: 3,
-    flexDirection: "row",
+    borderRadius: 4,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -134,10 +133,10 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   arrowDown: {
-    borderTopWidth: 5,
-    borderRightWidth: 5,
+    borderTopWidth: 10,
+    borderRightWidth: 10,
     borderBottomWidth: 0,
-    borderLeftWidth: 5,
+    borderLeftWidth: 10,
     borderTopColor: "rgba(196, 196, 196, 0.34)",
     borderRightColor: "transparent",
     borderBottomColor: "transparent",

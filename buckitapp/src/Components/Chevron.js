@@ -14,18 +14,21 @@ const Chevron = props => {
   );
 };
 
-const height = 40;
+Chevron.defaultProps = {
+  height: 40
+};
+
 const width = 6;
 
 const getStyles = props =>
   StyleSheet.create({
     chevron: {
       width: 0,
-      height: height
+      height: props.height
     },
     chevronMain: {
       width: 0,
-      height: height,
+      height: props.height,
       backgroundColor: props.color
     },
     chevronTriangle: {
@@ -33,7 +36,7 @@ const getStyles = props =>
       borderRightWidth: width,
       borderBottomWidth: 0,
       borderLeftWidth: 0,
-      borderTopWidth: height / 2,
+      borderTopWidth: props.height / 2,
       borderRightColor: "transparent",
       borderLeftColor: "transparent",
       borderBottomColor: "transparent",

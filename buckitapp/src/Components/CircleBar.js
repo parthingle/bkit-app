@@ -33,12 +33,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#FDB17F",
     justifyContent: "center",
     alignItems: "center",
-    textAlign: "center"
+    textAlign: "center",
+    opacity: 0.75
   },
   text: {
-    // fontFamily: "SF Pro Text",
-    fontFamily: "Arial",
-    fontSize: 25,
+    fontFamily: "SF Pro Text",
+    fontSize: 30,
     textAlign: "center",
     color: "#FEFDF4"
   },

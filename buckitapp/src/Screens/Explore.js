@@ -62,8 +62,16 @@ export default class Explore extends Component {
           style={{ width: "100%" }}
           horizontal={false}
           showsVerticalScrollIndicator={false}
+          overScrollMode="never"
         >
-          <Image style={{ width: "100%", height: 300 }} source={{ uri }} />
+          <Image
+            style={{ width: "100%", height: 300 }}
+            source={{
+              uri:
+                uri ||
+                "https://upload.wikimedia.org/wikipedia/commons/a/ad/Royce_Hall_post_rain.jpg"
+            }}
+          />
           <CircleBar
             style={{
               marginTop: 10,
@@ -78,7 +86,7 @@ export default class Explore extends Component {
                 <View key={i}>
                   <Text
                     style={{
-                      fontFamily: "Arial",
+                      fontFamily: "SF Pro Display",
                       fontSize: 26,
                       color: "#67B4B0",
                       paddingTop: 20,
@@ -89,7 +97,7 @@ export default class Explore extends Component {
                   </Text>
                   <Text
                     style={{
-                      fontFamily: "Arial",
+                      fontFamily: "SF Pro Display",
                       fontSize: 16,
                       color: "#767676",
                       lineHeight: 20
