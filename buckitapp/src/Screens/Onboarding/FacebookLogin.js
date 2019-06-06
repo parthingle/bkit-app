@@ -47,7 +47,7 @@ export default class FacebookLogin extends Component {
         <View style={{ paddingTop: "30%" }} />
         <Logo style={{ top: 30 }} />
         <View style={styles.buttonBox}>
-          <LoginButton onLoginFinished={this.onLoginFinished} />
+          {/* <LoginButton onLoginFinished={this.onLoginFinished} /> */}
         </View>
         <Bars onAuth={this.authFacebook} />
       </View>

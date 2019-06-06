@@ -74,7 +74,7 @@ class HomeScreen extends Component {
             }}
           >
             <ChevronButton
-              style={{ right: 40, top: 15, opacity: 0 }}
+              style={{ right: 40, top: 15, opacity: 1 }}
               onPress={() => this.props.navigation.navigate("Settings")}
             />
             <Logo
