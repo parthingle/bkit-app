@@ -16,25 +16,29 @@ export default class FacebookLogin extends Component {
   }
 
   authFacebook = async () => {
-    LoginManager.logInWithReadPermissions(["public_profile"]).then(res => {
-      if (res.isCancelled) {
+    try {
+      const login = await LoginManager.logInWithReadPermissions([
+        "public_profile"
+      ]);
+      if (login.isCancelled) {
         return;
       }
-      AccessToken.getCurrentAccessToken().then(data => {
-        axios
-          .post("http://localhost:8080/auth/facebook", {
-            access_token: data.accessToken
-          })
-          .then(res => {
-            if (res.status === 200) {
-              this.props.navigation.navigate("Home");
-            } else {
-              alert(res.status);
-            }
-          })
-          .catch(error => alert(error));
+      const data = await AccessToken.getCurrentAccessToken();
+      const access_token = data.accessToken;
+      const res = await axios.get("http://localhost:8080/auth/facebook", {
+        params: { access_token }
       });
-    });
+      console.log(access_token);
+      if (res.status === 200) {
+        await AsyncStorage.setItem("@jwtoken", res.data.jwtoken);
+        this.props.navigation.navigate("Home");
+      } else {
+        alert(res.status);
+      }
+    } catch (err) {
+      alert(err);
+      console.log(err);
+    }
   };
   componentDidMount() {}
   render() {
@@ -43,7 +47,7 @@ export default class FacebookLogin extends Component {
         <View style={{ paddingTop: "30%" }} />
         <Logo style={{ top: 30 }} />
         <View style={styles.buttonBox}>
-          {/* <LoginButton onLoginFinished={this.onLoginFinished} /> */}
+          <LoginButton onLoginFinished={this.onLoginFinished} />
         </View>
         <Bars onAuth={this.authFacebook} />
       </View>

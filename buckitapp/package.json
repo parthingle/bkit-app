@@ -37,7 +37,9 @@
   },
   "rnpm": {
     "assets": [
-      "assets/fonts/Pacifico"
+      "assets/fonts/Pacifico",
+      "assets/fonts/SF-Pro-Text-Regular",
+      "assets/fonts/SF-Pro-Display-Regular"
     ]
   }
 }

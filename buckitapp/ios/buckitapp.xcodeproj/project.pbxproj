@@ -65,6 +65,8 @@
 		06467C32AB0643E3B7AE44CE /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 713569A650CB4840B4C4CA63 /* Zocial.ttf */; };
 		C45498CC2FB4403097CDBCB2 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA47628FF6344DA4A2EE6876 /* libRNVectorIcons.a */; };
 		D6ECBB4502B94857B41C58A7 /* libRNVectorIcons-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EA9CB1B607411981885C91 /* libRNVectorIcons-tvOS.a */; };
+		160C3C708DA84CCAB829789F /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C115D7EF951411BAEF1CE6D /* SF-Pro-Text-Regular.otf */; };
+		495358D1C3D647CC98FB5B3C /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F0E9D0317EDF405A86C544CC /* SF-Pro-Display-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -431,6 +433,8 @@
 		440A78F8AD424DC3ADE35CF9 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; name = "RNVectorIcons.xcodeproj"; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		EA47628FF6344DA4A2EE6876 /* libRNVectorIcons.a */ = {isa = PBXFileReference; name = "libRNVectorIcons.a"; path = "libRNVectorIcons.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		66EA9CB1B607411981885C91 /* libRNVectorIcons-tvOS.a */ = {isa = PBXFileReference; name = "libRNVectorIcons-tvOS.a"; path = "libRNVectorIcons-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		3C115D7EF951411BAEF1CE6D /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; name = "SF-Pro-Text-Regular.otf"; path = "../assets/fonts/Pacifico/SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F0E9D0317EDF405A86C544CC /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; name = "SF-Pro-Display-Regular.otf"; path = "../assets/fonts/Pacifico/SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -770,6 +774,8 @@
 				A461DAF93D244D6C92604322 /* Octicons.ttf */,
 				6FA87F467C864741B14B1420 /* SimpleLineIcons.ttf */,
 				713569A650CB4840B4C4CA63 /* Zocial.ttf */,
+				3C115D7EF951411BAEF1CE6D /* SF-Pro-Text-Regular.otf */,
+				F0E9D0317EDF405A86C544CC /* SF-Pro-Display-Regular.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1277,6 +1283,8 @@
 				0524F7B2A311410786B1DFBD /* Octicons.ttf in Resources */,
 				364E06697ECC4580AF4C69D1 /* SimpleLineIcons.ttf in Resources */,
 				06467C32AB0643E3B7AE44CE /* Zocial.ttf in Resources */,
+				160C3C708DA84CCAB829789F /* SF-Pro-Text-Regular.otf in Resources */,
+				495358D1C3D647CC98FB5B3C /* SF-Pro-Display-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
