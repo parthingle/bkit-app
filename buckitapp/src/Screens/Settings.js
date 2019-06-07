@@ -12,14 +12,14 @@ export default class Settings extends Component {
   onLogoutFinished() {
     this.props.navigation.navigate("Login");
   }
-  async deleteJWT() {
+  deleteJWT = async () => {
     try {
       await AsyncStorage.removeItem("@jwtoken");
-      alert("Deleted JWToken");
+      this.props.navigation.navigate("Login");
     } catch (err) {
       alert(err);
     }
-  }
+  };
   render() {
     return (
       <View
@@ -31,9 +31,8 @@ export default class Settings extends Component {
       >
         <Text>This is a settings page.</Text>
         <View style={{ height: 20 }} />
-        <LoginButton onLogoutFinished={this.onLogoutFinished} />
         <View style={{ height: 20 }} />
-        <Button title="delete JWT" onPress={() => this.deleteJWT()} />
+        <Button title="Log out" onPress={this.deleteJWT} />
       </View>
     );
   }

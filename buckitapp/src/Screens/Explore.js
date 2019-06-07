@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import { Text, View, Image, ScrollView } from "react-native";
+import { Text, View, Image, ScrollView, Alert } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
+import Axios from "axios";
+import { StackActions } from "react-navigation";
+import keys from "../keys";
 import CircleBar from "../Components/CircleBar";
 import Button from "../Components/Button";
 import ChevronButton from "../Components/ChevronButton";
-
 export default class Explore extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +14,24 @@ export default class Explore extends Component {
       item: this.props.navigation.getParam("item")
     };
   }
-
+  handleBuckit = async () => {
+    var jwtoken = await AsyncStorage.getItem("@jwtoken");
+    var item = this.state.item;
+    Axios.post(keys.BASE_URL + "/item/buck/" + item.itemId, null, {
+      headers: { "x-auth-token": jwtoken }
+    })
+      .then(res => {
+        Alert.alert("Bucketed!", "", [
+          {
+            text: "Ok",
+            onPress: () => {
+              this.props.navigation.dispatch(StackActions.pop());
+            }
+          }
+        ]);
+      })
+      .catch(error => alert(err));
+  };
   render() {
     const {
       title,
@@ -113,9 +133,7 @@ export default class Explore extends Component {
         </ScrollView>
         <Button
           title="buck it"
-          onPress={() => {
-            alert("hi");
-          }}
+          onPress={this.handleBuckit}
           style={{
             position: "absolute",
             bottom: 25,

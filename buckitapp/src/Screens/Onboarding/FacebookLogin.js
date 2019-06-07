@@ -3,12 +3,10 @@ import { View, StyleSheet } from "react-native";
 import Logo from "../../Components/Logo";
 import FBSDK from "react-native-fbsdk";
 import Bars from "../../Components/Bars";
-import * as axios from "axios";
+import axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
-
-// import FBLoginButton from '../../Components/FBLoginButton'
-import { LoginButton, LoginManager, AccessToken } from "react-native-fbsdk";
-import { __asyncDelegator } from "tslib";
+import { LoginManager, AccessToken } from "react-native-fbsdk";
+import keys from "../../keys";
 
 export default class FacebookLogin extends Component {
   constructor(props) {
@@ -25,8 +23,8 @@ export default class FacebookLogin extends Component {
       }
       const data = await AccessToken.getCurrentAccessToken();
       const access_token = data.accessToken;
-      const res = await axios.get("http://localhost:8080/auth/facebook", {
-        params: { access_token }
+      const res = await axios.post(keys.BASE_URL + "/auth/facebook", {
+        access_token: data.accessToken
       });
       console.log(access_token);
       if (res.status === 200) {

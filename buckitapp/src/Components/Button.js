@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { TouchableWithoutFeedback, View, Text } from "react-native";
+import { TouchableOpacity, View, Text } from "react-native";
 
 const Button = props => (
-  <TouchableWithoutFeedback onPress={props.onPress}>
+  <TouchableOpacity onPress={props.onPress}>
     <View
       style={[
         {
@@ -29,7 +29,7 @@ const Button = props => (
         {props.title}
       </Text>
     </View>
-  </TouchableWithoutFeedback>
+  </TouchableOpacity>
 );
 
 export default Button;

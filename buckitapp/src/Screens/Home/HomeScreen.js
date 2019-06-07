@@ -14,8 +14,10 @@ import Graph from "../../Components/Graph";
 import { ListItem, Image } from "react-native-elements";
 import Axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
+import Icon from "react-native-vector-icons/Feather";
 import ChevronButton from "../../Components/ChevronButton";
 import Chevron from "../../Components/Chevron";
+import keys from "../../keys";
 
 const { height } = Dimensions.get("window");
 
@@ -36,7 +38,7 @@ class HomeScreen extends Component {
         this.props.navigation.navigate("Loading");
       }
       const instance = Axios.create({
-        baseURL: "http://localhost:8080",
+        baseURL: keys.BASE_URL,
         headers: { "x-auth-token": jwt }
       });
       console.log(jwt);
@@ -117,6 +119,9 @@ class HomeScreen extends Component {
             {this.state.items.map((item, i) => (
               <ListItem
                 key={i}
+                // rightIcon={
+                //   item.done ? <Icon name="check-circle" size={20} /> : <View />
+                // }
                 style={styles.listItem}
                 tension={100}
                 activeScale={0.95}
@@ -171,7 +176,7 @@ class HomeScreen extends Component {
                 title={item.title}
                 titleStyle={{
                   color: "#767676",
-                  fontFamily: "SF Pro Text",
+                  // fontFamily: "SF Pro Text",
                   fontSize: 17
                 }}
                 subtitle={item.tags.join(", ")}
