@@ -1,28 +1,26 @@
-import React, { Component } from "react";
+import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Triangles from "../Components/Triangles";
 const maxSize = 5;
 
-export default class Graph extends Component {
-  render() {
-    const data = ["AN", "BC", "AS", "SD", "SO", "KK", "SD"];
-    const circles = data.slice(0, maxSize - 1);
-    const diff = data.length - circles.length;
-    if (diff > 0) {
-      circles.push("+" + diff);
-    }
-    return (
-      <View style={[styles.container, this.props.style]}>
-        <Triangles left={true} />
-        {circles.map((initial, i) => (
-          <View key={i} style={styles.circle}>
-            <Text style={styles.text}>{initial}</Text>
-          </View>
-        ))}
-        <Triangles left={false} />
-      </View>
-    );
+export default function CircleBar(props) {
+  const data = ["AN", "BC", "AS", "SD", "SO", "KK", "SD"];
+  const circles = data.slice(0, maxSize - 1);
+  const diff = data.length - circles.length;
+  if (diff > 0) {
+    circles.push("+" + diff);
   }
+  return (
+    <View style={[styles.container, props.style]}>
+      <Triangles left={true} />
+      {circles.map((initial, i) => (
+        <View key={i} style={styles.circle}>
+          <Text style={styles.text}>{initial}</Text>
+        </View>
+      ))}
+      <Triangles left={false} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

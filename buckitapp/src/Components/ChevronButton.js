@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { TouchableWithoutFeedback, View, Text } from "react-native";
 import Chevron from "../Components/Chevron";
 

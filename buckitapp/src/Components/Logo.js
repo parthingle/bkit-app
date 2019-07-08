@@ -1,10 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import { Text, StyleSheet } from "react-native";
 
-export default class Graph extends Component {
-  render() {
-    return <Text style={[styles.logo, this.props.style]}>buckit</Text>;
-  }
+export default function Logo(props) {
+  return <Text style={[styles.logo, props.style]}>buckit</Text>;
 }
 
 const styles = StyleSheet.create({
