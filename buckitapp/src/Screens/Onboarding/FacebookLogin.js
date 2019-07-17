@@ -1,21 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import Logo from "../../Components/Logo";
-import FBSDK from "react-native-fbsdk";
 import Bars from "../../Components/Bars";
-import * as axios from "axios";
+import Axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
+import { LoginManager, AccessToken } from "react-native-fbsdk";
+import keys from "../../keys";
 
-// import FBLoginButton from '../../Components/FBLoginButton'
-import { LoginButton, LoginManager, AccessToken } from "react-native-fbsdk";
-import { __asyncDelegator } from "tslib";
-
-export default class FacebookLogin extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  authFacebook = async () => {
+export default function FacebookLogin(props) {
+  async function authFacebook() {
     try {
       const login = await LoginManager.logInWithReadPermissions([
         "public_profile"
@@ -25,13 +18,13 @@ export default class FacebookLogin extends Component {
       }
       const data = await AccessToken.getCurrentAccessToken();
       const access_token = data.accessToken;
-      const res = await axios.get("http://localhost:8080/auth/facebook", {
-        params: { access_token }
+      const res = await Axios.post(keys.BASE_URL + "/auth/facebook", {
+        access_token
       });
       console.log(access_token);
       if (res.status === 200) {
         await AsyncStorage.setItem("@jwtoken", res.data.jwtoken);
-        this.props.navigation.navigate("Home");
+        props.navigation.navigate("Home");
       } else {
         alert(res.status);
       }
@@ -39,20 +32,17 @@ export default class FacebookLogin extends Component {
       alert(err);
       console.log(err);
     }
-  };
-  componentDidMount() {}
-  render() {
-    return (
-      <View style={{ flex: 1, backgroundColor: "#FEFDF4" }}>
-        <View style={{ paddingTop: "30%" }} />
-        <Logo style={{ top: 30 }} />
-        <View style={styles.buttonBox}>
-          {/* <LoginButton onLoginFinished={this.onLoginFinished} /> */}
-        </View>
-        <Bars onAuth={this.authFacebook} />
-      </View>
-    );
   }
+  return (
+    <View style={{ flex: 1, backgroundColor: "#FEFDF4" }}>
+      <View style={{ paddingTop: "30%" }} />
+      <Logo style={{ top: 30 }} />
+      <View style={styles.buttonBox}>
+        {/* <LoginButton onLoginFinished={onLoginFinished} /> */}
+      </View>
+      <Bars onAuth={authFacebook} />
+    </View>
+  );
 }
 
 var styles = StyleSheet.create({

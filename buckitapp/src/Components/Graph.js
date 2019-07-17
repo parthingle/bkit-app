@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -7,31 +7,27 @@ import {
   TouchableHighlight
 } from "react-native";
 
-export default class Graph extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { pressStatus: false };
-    this.renderItem = this.renderItem.bind(this);
-    this.onShowUnderlay = this.onShowUnderlay.bind(this);
-    this.onHideUnderlay = this.onHideUnderlay.bind(this);
-    this.data = [
-      { month: "JAN", count: 2, key: "JAN" },
-      { month: "FEB", count: 0, key: "FEB" },
-      { month: "MAR", count: 1, key: "MAR" },
-      { month: "APR", count: 6, key: "APR" },
-      { month: "MAY", count: 3, key: "MAY" },
-      { month: "JUN", count: 7, key: "JUN" },
-      { month: "JUL", count: 4, key: "JUL" },
-      { month: "AUG", count: 3, key: "AUG" },
-      { month: "SEP", count: 9, key: "SEP" },
-      { month: "OCT", count: 11, key: "OCT" },
-      { month: "NOV", count: 10, key: "NOV" },
-      { month: "DEC", count: 2, key: "DEC" }
-    ].reverse();
-  }
+export default function Graph(props) {
+  const data = [
+    { month: "JAN", count: 2 },
+    { month: "FEB", count: 0 },
+    { month: "MAR", count: 1 },
+    { month: "APR", count: 6 },
+    { month: "MAY", count: 3 },
+    { month: "JUN", count: 7 },
+    { month: "JUL", count: 4 },
+    { month: "AUG", count: 3 },
+    { month: "SEP", count: 9 },
+    { month: "OCT", count: 11 },
+    { month: "NOV", count: 10 },
+    { month: "DEC", count: 2 }
+  ].reverse();
+  data.forEach((datum, i, arr) => (arr[i].key = datum.month));
 
-  renderItem({ item, separators }) {
-    const isPressed = item.key === this.state.pressedKey;
+  const [pressedMonth, setPressedMonth] = useState(null);
+
+  function renderItem({ item, separators }) {
+    const isPressed = item.key === pressedMonth;
     const barColor = isPressed ? "#FDB17F" : "#C4C4C4";
     const textColor = isPressed ? "#FD9268" : "#767676";
 
@@ -40,8 +36,8 @@ export default class Graph extends Component {
         style={styles.barContainer}
         underlayColor={null}
         onPress={() => {}}
-        onShowUnderlay={() => this.onShowUnderlay(item.key)}
-        onHideUnderlay={this.onHideUnderlay}
+        onShowUnderlay={() => setPressedMonth(item.key)}
+        onHideUnderlay={() => setPressedMonth(null)}
       >
         <View style={styles.barContainer}>
           {isPressed && (
@@ -64,26 +60,19 @@ export default class Graph extends Component {
       </TouchableHighlight>
     );
   }
-  onShowUnderlay(key) {
-    this.setState({ pressedKey: key });
-  }
-  onHideUnderlay() {
-    this.setState({ pressedKey: null });
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <FlatList
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          inverted={true}
-          ItemSeparatorComponent={() => <View />}
-          data={this.data}
-          renderItem={this.renderItem}
-        />
-      </View>
-    );
-  }
+
+  return (
+    <View style={styles.container}>
+      <FlatList
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        inverted={true}
+        ItemSeparatorComponent={() => <View />}
+        data={data}
+        renderItem={renderItem}
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

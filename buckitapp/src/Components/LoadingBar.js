@@ -1,32 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
 
-export default class LoadingBar extends Component {
-  createBar(num, percentage) {
-    let progressBar = [];
-    let numBlue = Math.floor(num * percentage);
-    for (let i = 0; i < numBlue; i++) {
-      progressBar.push(
-        <View
-          style={[
-            styles.bar,
-            { backgroundColor: "#FDB17F", opacity: 0.5 + i * 0.05 }
-          ]}
-          key={i}
-        />
-      );
-    }
-    for (let i = numBlue; i < num; i++) {
-      progressBar.push(
-        <View style={[{ backgroundColor: "#C4C4C4" }, styles.bar]} key={i} />
-      );
-    }
-    return progressBar;
-  }
-
-  render() {
-    return <View style={styles.BarContainer}>{this.createBar(16, 0.7)}</View>;
-  }
+export default function LoadingBar(props) {
+  const count = 16;
+  let bars = [...Array(count)];
+  bars = bars.map((bar, i) => {
+    const isFilledIn = i < count * props.percent;
+    const filledInStyle = {
+      backgroundColor: "#FDB17F",
+      opacity: 1 - (0.5 / count) * i
+    };
+    return <View key={i} style={[styles.bar, isFilledIn && filledInStyle]} />;
+  });
+  return <View style={styles.BarContainer}>{bars}</View>;
 }
 
 const styles = StyleSheet.create({
@@ -38,6 +24,7 @@ const styles = StyleSheet.create({
     width: 1000
   },
   bar: {
+    backgroundColor: "#C4C4C4",
     opacity: 0.3,
     borderRadius: 3,
     width: 7,
