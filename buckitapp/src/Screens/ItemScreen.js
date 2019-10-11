@@ -8,6 +8,29 @@ import CircleBar from "../Components/CircleBar";
 import Button from "../Components/Button";
 import ChevronButton from "../Components/ChevronButton";
 
+function randomBucketedMessage() {
+  var messages =
+  [
+    "You bucked it up!",
+    "That was bucking awesome!",
+    "What the buck?",
+    "You buck sh!t up",
+    "You\'re doing great honey"
+  ];
+  return messages[Math.floor(Math.random() * messages.length)];
+}
+
+function randomFace() {
+  var faces =
+  [
+    ":O",
+    ";)",
+    ":P",
+    "¯\\_(ツ)_/¯"
+  ]
+  return faces[Math.floor(Math.random() * faces.length)]
+}
+
 export default function ItemScreen(props) {
   async function handleBuckit() {
     const jwtoken = await AsyncStorage.getItem("@jwtoken");
@@ -18,7 +41,7 @@ export default function ItemScreen(props) {
         headers: { "x-auth-token": jwtoken }
       }
     );
-    Alert.alert("Bucketed!", "", [
+    Alert.alert( randomBucketedMessage(), randomFace(), [
       {
         text: "Ok",
         onPress: () => {
@@ -132,10 +155,9 @@ export default function ItemScreen(props) {
         title="buck it"
         onPress={handleBuckit}
         style={{
-          position: "absolute",
           bottom: 25,
           shadowOpacity: 0.05,
-          shadowRadius: 3
+          shadowRadius: 3,
         }}
       />
     </View>
