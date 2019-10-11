@@ -1,5 +1,5 @@
 import Home from "./Screens/Home/HomeScreen";
-import Explore from "./Screens/Explore";
+import ItemScreen from "./Screens/ItemScreen";
 import { createStackNavigator } from "react-navigation";
 import Settings from "./Screens/Settings";
 
@@ -8,8 +8,8 @@ const AppTab = createStackNavigator(
     Home: {
       screen: Home
     },
-    Explore: {
-      screen: Explore
+    ItemScreen: {
+      screen: ItemScreen
     },
     Settings: {
       screen: Settings,
