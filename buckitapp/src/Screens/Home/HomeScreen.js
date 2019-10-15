@@ -168,7 +168,7 @@ function HomeScreen(props) {
                 fontSize: 11,
                 color: "rgba(118, 118, 118, 0.47)"
               }}
-              onPress={() => props.navigation.navigate("Explore", { item })}
+              onPress={() => props.navigation.navigate("ItemScreen", { item })}
             />
           ))}
         </ScrollView>
