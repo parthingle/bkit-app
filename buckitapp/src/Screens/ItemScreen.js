@@ -15,7 +15,9 @@ function randomBucketedMessage() {
     "That was bucking awesome!",
     "What the buck?",
     "You buck sh!t up",
-    "You\'re doing great honey"
+    "You\'re doing great honey",
+    "For buck's sake",
+    "Holy buck!"
   ];
   return messages[Math.floor(Math.random() * messages.length)];
 }
