@@ -80,7 +80,7 @@ function HomeScreen(props) {
         </View>
         <LoadingBar percent={percentDone} />
       </View>
-      <Graph />
+      <Graph dates={buckitItems.map(item => item.dateCreated)} />
       <BottomDrawer
         downDisplay={height / 2}
         containerHeight={height}
@@ -161,7 +161,8 @@ function HomeScreen(props) {
               titleStyle={{
                 color: "#767676",
                 // fontFamily: "SF Pro Text",
-                fontSize: 17
+                fontSize: 17,
+                textDecorationLine: item.done ? "line-through" : "none"
               }}
               subtitle={item.tags.join(", ")}
               subtitleStyle={{

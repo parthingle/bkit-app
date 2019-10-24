@@ -8,22 +8,39 @@ import {
 } from "react-native";
 
 export default function Graph(props) {
-  const data = [
-    { month: "JAN", count: 2 },
-    { month: "FEB", count: 0 },
-    { month: "MAR", count: 1 },
-    { month: "APR", count: 6 },
-    { month: "MAY", count: 3 },
-    { month: "JUN", count: 7 },
-    { month: "JUL", count: 4 },
-    { month: "AUG", count: 3 },
-    { month: "SEP", count: 9 },
-    { month: "OCT", count: 11 },
-    { month: "NOV", count: 10 },
-    { month: "DEC", count: 2 }
-  ].reverse();
-  data.forEach((datum, i, arr) => (arr[i].key = datum.month));
+  const counts = {};
+  for (const unixDate of props.dates) {
+    const date = new Date(unixDate);
+    if (counts[date.getFullYear()][date.getMonth()]) {
+      counts[date.getFullYear()][date.getMonth()] += 1;
+    } else {
+      counts[date.getFullYear()][date.getMonth()] = 0;
+    }
+  }
+  const now = new Date();
+  const months = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC"
+  ];
 
+  const data = [];
+  for (let i = 0; i < 12; i++) {
+    const monthIndex = (now.getMonth() - i + 12) % 12;
+    const year = now.getFullYear() - Math.floor((i + now.getMonth()) / 12);
+    const count = counts[year] ? count[year][monthIndex] || 0 : 0;
+    const month = months[monthIndex];
+    data.push({ month, key: month, count });
+  }
   const [pressedMonth, setPressedMonth] = useState(null);
 
   function renderItem({ item, separators }) {
@@ -52,7 +69,7 @@ export default function Graph(props) {
           <View
             style={[
               styles.bar,
-              { height: 10 * item.count, backgroundColor: barColor }
+              { height: 2 + 10 * item.count, backgroundColor: barColor }
             ]}
           />
           <Text style={[styles.title, { color: textColor }]}>{item.month}</Text>
