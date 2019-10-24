@@ -7,6 +7,7 @@ import Graph from "../../Components/Graph";
 import { ListItem, Image } from "react-native-elements";
 import Axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
+import Checkmark from "../../Components/Checkmark"
 import ChevronButton from "../../Components/ChevronButton";
 import Chevron from "../../Components/Chevron";
 import keys from "../../keys";
@@ -105,9 +106,6 @@ function HomeScreen(props) {
           {buckitItems.map((item, i) => (
             <ListItem
               key={i}
-              // rightIcon={
-              //   item.done ? <Icon name="check-circle" size={20} /> : <View />
-              // }
               style={styles.listItem}
               tension={100}
               activeScale={0.95}
@@ -118,6 +116,9 @@ function HomeScreen(props) {
                 shadowOffset: { width: 0.3, height: 0.3 },
                 shadowOpacity: 0.25
               }}
+              rightIcon={item.done? <Checkmark style = {{
+                marginRight: 14
+              }}/> : <View/>}
               leftElement={
                 <View
                   style={{
