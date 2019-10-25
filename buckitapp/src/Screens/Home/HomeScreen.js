@@ -170,8 +170,7 @@ function HomeScreen(props) {
               titleStyle={{
                 color: "#767676",
                 // fontFamily: "SF Pro Text",
-                fontSize: 17,
-                textDecorationLine: item.done ? "line-through" : "none"
+                fontSize: 17
               }}
               subtitle={item.tags.join(", ")}
               subtitleStyle={{

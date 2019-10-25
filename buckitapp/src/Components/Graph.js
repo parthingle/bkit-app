@@ -80,7 +80,7 @@ export default function Graph(props) {
           <View
             style={[
               styles.bar,
-              { height: 2 + 10 * item.count, backgroundColor: barColor }
+              { height: 2 + 20 * item.count, backgroundColor: barColor }
             ]}
           />
           <Text style={[styles.title, { color: textColor }]}>{item.month}</Text>
