@@ -9,13 +9,18 @@ import {
 
 export default function Graph(props) {
   const counts = {};
-  for (const unixDate of props.dates) {
-    const date = new Date(unixDate);
-    if (counts[date.getFullYear()][date.getMonth()]) {
-      counts[date.getFullYear()][date.getMonth()] += 1;
-    } else {
-      counts[date.getFullYear()][date.getMonth()] = 0;
+  const dates = props.items.map(item => item.done);
+  for (const unixDate of dates) {
+    const date = new Date(parseInt(unixDate));
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    if (!counts[year]) {
+      counts[year] = {};
     }
+    if (!counts[year][month]) {
+      counts[year][month] = 0;
+    }
+    counts[year][month] += 1;
   }
   const now = new Date();
   const months = [
@@ -36,8 +41,14 @@ export default function Graph(props) {
   const data = [];
   for (let i = 0; i < 12; i++) {
     const monthIndex = (now.getMonth() - i + 12) % 12;
-    const year = now.getFullYear() - Math.floor((i + now.getMonth()) / 12);
-    const count = counts[year] ? count[year][monthIndex] || 0 : 0;
+    const year = now.getFullYear() + Math.floor((now.getMonth() - i) / 12);
+    if (!counts[year]) {
+      counts[year] = {};
+    }
+    if (!counts[year][monthIndex]) {
+      counts[year][monthIndex] = 0;
+    }
+    const count = counts[year][monthIndex];
     const month = months[monthIndex];
     data.push({ month, key: month, count });
   }
