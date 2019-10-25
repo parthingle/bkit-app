@@ -9,13 +9,12 @@ import Button from "../Components/Button";
 import ChevronButton from "../Components/ChevronButton";
 
 function randomBucketedMessage() {
-  var messages =
-  [
+  var messages = [
     "You bucked it up!",
     "That was bucking awesome!",
     "What the buck?",
     "You buck sh!t up",
-    "You\'re doing great honey",
+    "You're doing great honey",
     "For buck's sake",
     "Holy buck!"
   ];
@@ -23,19 +22,15 @@ function randomBucketedMessage() {
 }
 
 function randomFace() {
-  var faces =
-  [
-    ":O",
-    ";)",
-    ":P",
-    "¯\\_(ツ)_/¯"
-  ]
-  return faces[Math.floor(Math.random() * faces.length)]
+  var faces = [":O", ";)", ":P", "¯\\_(ツ)_/¯"];
+  return faces[Math.floor(Math.random() * faces.length)];
 }
 
 export default function ItemScreen(props) {
   async function handleBuckit() {
     const jwtoken = await AsyncStorage.getItem("@jwtoken");
+    console.log(keys.BASE_URL + "/item/buck/" + item.itemId);
+    console.log(jwtoken);
     const res = await Axios.post(
       keys.BASE_URL + "/item/buck/" + item.itemId,
       null,
@@ -43,7 +38,7 @@ export default function ItemScreen(props) {
         headers: { "x-auth-token": jwtoken }
       }
     );
-    Alert.alert( randomBucketedMessage(), randomFace(), [
+    Alert.alert(randomBucketedMessage(), randomFace(), [
       {
         text: "Ok",
         onPress: () => {
@@ -153,15 +148,17 @@ export default function ItemScreen(props) {
         </View>
         <View style={{ height: 50 }} />
       </ScrollView>
-      <Button
-        title="buck it"
-        onPress={handleBuckit}
-        style={{
-          bottom: 25,
-          shadowOpacity: 0.05,
-          shadowRadius: 3,
-        }}
-      />
+      {!item.done && (
+        <Button
+          title="buck it"
+          onPress={handleBuckit}
+          style={{
+            bottom: 25,
+            shadowOpacity: 0.05,
+            shadowRadius: 3
+          }}
+        />
+      )}
     </View>
   );
 }

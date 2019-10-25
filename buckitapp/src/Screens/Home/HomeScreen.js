@@ -7,7 +7,7 @@ import Graph from "../../Components/Graph";
 import { ListItem, Image } from "react-native-elements";
 import Axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
-import Checkmark from "../../Components/Checkmark"
+import Checkmark from "../../Components/Checkmark";
 import ChevronButton from "../../Components/ChevronButton";
 import Chevron from "../../Components/Chevron";
 import keys from "../../keys";
@@ -81,7 +81,7 @@ function HomeScreen(props) {
         </View>
         <LoadingBar percent={percentDone} />
       </View>
-      <Graph />
+      <Graph items={buckitItems} />
       <BottomDrawer
         downDisplay={height / 2}
         containerHeight={height}
@@ -116,9 +116,17 @@ function HomeScreen(props) {
                 shadowOffset: { width: 0.3, height: 0.3 },
                 shadowOpacity: 0.25
               }}
-              rightIcon={item.done? <Checkmark style = {{
-                marginRight: 14
-              }}/> : <View/>}
+              rightIcon={
+                item.done ? (
+                  <Checkmark
+                    style={{
+                      marginRight: 14
+                    }}
+                  />
+                ) : (
+                  <View />
+                )
+              }
               leftElement={
                 <View
                   style={{
