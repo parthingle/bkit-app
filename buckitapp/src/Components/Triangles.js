@@ -1,6 +1,8 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
+const height = 55;
+
 function Triangle(props) {
   return (
     <View
@@ -21,7 +23,7 @@ function Bar(props) {
       style={[
         {
           backgroundColor: props.color,
-          height: 70,
+          height: height,
           width: 8
         },
         props.left ? { marginLeft: -15 } : { marginRight: -15 }
@@ -54,8 +56,8 @@ const styles = StyleSheet.create({
     borderStyle: "solid"
   },
   arrowLeft: {
-    borderTopWidth: 35,
-    borderBottomWidth: 35,
+    borderTopWidth: height / 2,
+    borderBottomWidth: height / 2,
     borderRightWidth: 0,
     borderLeftWidth: 15,
     borderTopColor: "transparent",
@@ -63,8 +65,8 @@ const styles = StyleSheet.create({
     borderRightColor: "transparent"
   },
   arrowRight: {
-    borderTopWidth: 35,
-    borderBottomWidth: 35,
+    borderTopWidth: height / 2,
+    borderBottomWidth: height / 2,
     borderRightWidth: 15,
     borderLeftWidth: 0,
     borderTopColor: "transparent",

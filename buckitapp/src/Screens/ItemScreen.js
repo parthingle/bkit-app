@@ -50,6 +50,7 @@ export default function ItemScreen(props) {
 
   const item = props.navigation.getParam("item");
   const {
+    usersWhoBucketed,
     title,
     content: { description, thingsToDo },
     album
@@ -110,6 +111,15 @@ export default function ItemScreen(props) {
           }}
         />
         <CircleBar
+          data={usersWhoBucketed.map(user => {
+            if (user.length < 2) {
+              return "??";
+            }
+            return (
+              String.fromCharCode(65 + Number(user[0])) +
+              String.fromCharCode(65 + Number(user[1]))
+            );
+          })}
           style={{
             marginTop: 10,
             marginBottom: 10,

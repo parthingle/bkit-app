@@ -4,7 +4,7 @@ import Triangles from "../Components/Triangles";
 const maxSize = 5;
 
 export default function CircleBar(props) {
-  const data = ["AN", "BC", "AS", "SD", "SO", "KK", "SD"];
+  const data = props.data;
   const circles = data.slice(0, maxSize - 1);
   const diff = data.length - circles.length;
   if (diff > 0) {
@@ -25,8 +25,8 @@ export default function CircleBar(props) {
 
 const styles = StyleSheet.create({
   circle: {
-    height: 50,
-    width: 50,
+    height: 45,
+    width: 45,
     borderRadius: 25,
     backgroundColor: "#FDB17F",
     justifyContent: "center",
@@ -36,13 +36,13 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "SF Pro Text",
-    fontSize: 30,
+    fontSize: 25,
     textAlign: "center",
     color: "#FEFDF4"
   },
   container: {
     width: "100%",
-    height: 70,
+    height: 55,
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     fontFamily: "Pacifico",
     fontStyle: "normal",
     fontWeight: "normal",
-    fontSize: 65,
+    fontSize: 45,
     color: "#67B4B0",
     textAlign: "center"
   }
