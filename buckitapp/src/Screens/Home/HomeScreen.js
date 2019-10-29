@@ -54,14 +54,7 @@ function HomeScreen(props) {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <View
-          style={{
-            width: "100%",
-            alignItems: "center",
-            flexDirection: "row",
-            justifyContent: "space-evenly"
-          }}
-        >
+        <View style={styles.headerConstantsContainer}>
           <ChevronButton
             style={{ right: 40, top: 15, opacity: 1 }}
             onPress={() => props.navigation.navigate("Settings")}
@@ -89,14 +82,9 @@ function HomeScreen(props) {
         startUp={false}
         roundedEdges={true}
         borderRadius={40}
-        shadow={false}
       >
         <ScrollView
-          contentContainerStyle={{
-            backgroundColor: "#F9F9F9",
-            borderRadius: 40,
-            alignItems: "center"
-          }}
+          contentContainerStyle={styles.scrollViewContainer}
           bounces={false}
           showsVerticalScrollIndicator={false}
         >
@@ -107,26 +95,8 @@ function HomeScreen(props) {
             <ListItem
               key={i}
               style={styles.listItem}
-              tension={100}
-              activeScale={0.95}
-              containerStyle={{
-                borderRadius: 10,
-                backgroundColor: "#FEFDF4",
-                padding: 0,
-                shadowOffset: { width: 0.3, height: 0.3 },
-                shadowOpacity: 0.25
-              }}
-              rightIcon={
-                item.done ? (
-                  <Checkmark
-                    style={{
-                      marginRight: 14
-                    }}
-                  />
-                ) : (
-                  <View />
-                )
-              }
+              containerStyle={styles.listItemContainer}
+              rightIcon={<Checkmark done={item.done}/>}
               leftElement={
                 <View
                   style={{
@@ -192,6 +162,11 @@ function useBuckitItems() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "#CBEDED"
+  },
   headerContainer: {
     top: -20,
     paddingTop: 40,
@@ -199,10 +174,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#FEFDF4"
   },
-  container: {
-    flex: 1,
+  headerConstantsContainer: {
+    width: "100%",
     alignItems: "center",
-    backgroundColor: "#CBEDED"
+    flexDirection: "row",
+    justifyContent: "space-evenly"
+  },
+  scrollViewContainer: {
+    backgroundColor: "#F9F9F9",
+    borderRadius: 40,
+    alignItems: "center"
   },
   bottomDrawer: {
     flexDirection: "row",
@@ -214,17 +195,15 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flex: 1,
     width: "80%",
-    borderRadius: 20
+    borderRadius: 10
   },
-  contentContainer: {
-    flexDirection: "column",
-    flex: 1,
-    backgroundColor: "#F2F2F2"
+  listItemContainer: {
+    borderRadius: 10,
+    backgroundColor: "#FEFDF4",
+    padding: 0,
+    shadowOffset: { width: 0.3, height: 0.3 },
+    shadowOpacity: 0.25
   },
-  bottomDrawerStyle: {
-    backgroundColor: "green",
-    borderRadius: 60
-  }
 });
 
 export default HomeScreen;
