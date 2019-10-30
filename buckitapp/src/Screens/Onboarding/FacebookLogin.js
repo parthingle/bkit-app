@@ -2,36 +2,25 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import Logo from "../../Components/Logo";
 import Bars from "../../Components/Bars";
-import Axios from "axios";
-import AsyncStorage from "@react-native-community/async-storage";
 import { LoginManager, AccessToken } from "react-native-fbsdk";
-import keys from "../../keys";
+import Client from "../../Client";
 
 export default function FacebookLogin(props) {
   async function authFacebook() {
-    try {
-      const login = await LoginManager.logInWithReadPermissions([
-        "public_profile"
-      ]);
-      if (login.isCancelled) {
-        return;
-      }
-      const data = await AccessToken.getCurrentAccessToken();
-      const access_token = data.accessToken;
-      const res = await Axios.post(keys.BASE_URL + "/auth/facebook", {
-        access_token
-      });
-      console.log(access_token);
-      if (res.status === 200) {
-        await AsyncStorage.setItem("@jwtoken", res.data.jwtoken);
-        props.navigation.navigate("Home");
-      } else {
-        alert(res.status);
-      }
-    } catch (err) {
-      alert(err);
-      console.log(err);
+    const login = await LoginManager.logInWithReadPermissions([
+      "public_profile"
+    ]);
+    if (login.isCancelled) {
+      return;
     }
+    const data = await AccessToken.getCurrentAccessToken();
+    const fat = data.accessToken;
+    const res = await Client.authFacebook(fat);
+    if (res.status !== 200) {
+      alert("Login Failed: " + res.status);
+      return;
+    }
+    props.navigation.navigate("Home");
   }
   return (
     <View style={{ flex: 1, backgroundColor: "#FEFDF4" }}>

@@ -5,19 +5,6 @@ import Button from "../Components/Button";
 import AsyncStorage from "@react-native-community/async-storage";
 
 export default function Settings(props) {
-  function onLogoutFinished() {
-    props.navigation.navigate("Login");
-  }
-
-  async function deleteJWT() {
-    try {
-      await AsyncStorage.removeItem("@jwtoken");
-      props.navigation.navigate("Login");
-    } catch (err) {
-      alert(err);
-    }
-  }
-
   return (
     <View
       style={{
@@ -32,7 +19,7 @@ export default function Settings(props) {
       <Button
         title="Log out"
         onPress={() => {
-          deleteJWT();
+          props.navigation.navigate("Login");
         }}
       />
     </View>

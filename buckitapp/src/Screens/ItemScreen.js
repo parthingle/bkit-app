@@ -1,12 +1,10 @@
 import React from "react";
 import { Text, View, Image, ScrollView, Alert } from "react-native";
-import AsyncStorage from "@react-native-community/async-storage";
-import Axios from "axios";
 import { StackActions } from "react-navigation";
-import keys from "../keys";
 import CircleBar from "../Components/CircleBar";
 import Button from "../Components/Button";
 import ChevronButton from "../Components/ChevronButton";
+import Client from "../Client";
 
 function randomBucketedMessage() {
   var messages = [
@@ -27,17 +25,19 @@ function randomFace() {
 }
 
 export default function ItemScreen(props) {
-  async function handleBuckit() {
-    const jwtoken = await AsyncStorage.getItem("@jwtoken");
-    console.log(keys.BASE_URL + "/item/buck/" + item.itemId);
-    console.log(jwtoken);
-    const res = await Axios.post(
-      keys.BASE_URL + "/item/buck/" + item.itemId,
-      null,
-      {
-        headers: { "x-auth-token": jwtoken }
-      }
-    );
+  const item = props.navigation.getParam("item");
+
+  async function buckItem() {
+    const res = await Client.itemBuck(item.itemId);
+    if (res.status === 401) {
+      alert("Error authenticating user: " + res.status);
+      props.navigation.navigate("Login");
+      return;
+    } else if (res.status !== 200) {
+      alert("Error buckiting item: " + res.status);
+      return;
+    }
+
     Alert.alert(randomBucketedMessage(), randomFace(), [
       {
         text: "Ok",
@@ -48,7 +48,6 @@ export default function ItemScreen(props) {
     ]);
   }
 
-  const item = props.navigation.getParam("item");
   const {
     usersWhoBucketed,
     title,
@@ -77,7 +76,6 @@ export default function ItemScreen(props) {
           justifyContent: "space-between",
           alignItems: "center",
           flexDirection: "row",
-          shadowOpacity: 0.5,
           shadowRadius: 30,
           paddingTop: 35,
           paddingLeft: 10,
@@ -161,7 +159,7 @@ export default function ItemScreen(props) {
       {!item.done && (
         <Button
           title="buck it"
-          onPress={handleBuckit}
+          onPress={buckItem}
           style={{
             bottom: 25,
             shadowOpacity: 0.05,

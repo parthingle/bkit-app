@@ -5,12 +5,10 @@ import LoadingBar from "../../Components/LoadingBar";
 import Logo from "../../Components/Logo";
 import Graph from "../../Components/Graph";
 import { ListItem, Image } from "react-native-elements";
-import Axios from "axios";
-import AsyncStorage from "@react-native-community/async-storage";
 import Checkmark from "../../Components/Checkmark";
 import ChevronButton from "../../Components/ChevronButton";
 import Chevron from "../../Components/Chevron";
-import keys from "../../keys";
+import Client from "../../Client";
 
 const { height } = Dimensions.get("window");
 
@@ -21,34 +19,18 @@ function HomeScreen(props) {
   // this effect should never be called more than once,
   // so we pass an empty array
   useEffect(() => {
-    getBuckitItems();
+    loadUserHome();
   }, []);
-  async function getBuckitItems() {
-    try {
-      console.log("GET /user/home");
-      const jwt = await AsyncStorage.getItem("@jwtoken");
-      if (!jwt) {
-        this.props.navigation.navigate("Loading");
-      }
-      const instance = Axios.create({
-        baseURL: keys.BASE_URL,
-        headers: { "x-auth-token": jwt }
-      });
-      console.log(jwt);
-      const res = await instance.get("/user/home");
-      if (res.status === 200) {
-        // Request succeeded
-        setBuckitItems(res.data.items);
-        setPercentDone(res.data.completionPercentage);
-      } else {
-        // User does not exist: sending to sign up page
-        props.navigation.navigate("SignUp");
-      }
-    } catch (err) {
-      const msg = err + " -- " + err.response.data.message;
-      alert(msg);
-      console.log(msg);
+
+  async function loadUserHome() {
+    const res = await Client.userHome();
+    if (res.status !== 200) {
+      alert("Error loading Buckit items: " + res.status);
+      props.navigation.navigate("Login");
+      return;
     }
+    setBuckitItems(res.data.items);
+    setPercentDone(res.data.completionPercentage);
   }
 
   return (
