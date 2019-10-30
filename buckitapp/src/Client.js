@@ -77,11 +77,10 @@ export default class Client {
   // make a request with authentication and reauthenticate if needed
   static async requestWithAuth(config) {
     // add authentication header
-    if (!this.jwt) {
-      this.jwt = await AsyncStorage.getItem("@jwtoken");
-    }
+    // in the future we can cache the token in memory
+    let jwtoken = await AsyncStorage.getItem("@jwtoken");
     config.headers = config.headers || {};
-    config.headers["x-auth-token"] = this.jwt;
+    config.headers["x-auth-token"] = jwtoken;
 
     // attempt the request
     let res = await Client.request(config);
@@ -89,8 +88,8 @@ export default class Client {
       // JWT is invalid, get a new one
       const refreshRes = await Client.authRefresh();
       if (refreshRes.status == 200) {
-        this.jwt = await AsyncStorage.getItem("@jwtoken");
-        config.headers["x-auth-token"] = this.jwt;
+        jwtoken = await AsyncStorage.getItem("@jwtoken");
+        config.headers["x-auth-token"] = jwtoken;
         // reattempt request
         res = await Client.request(config);
       }
