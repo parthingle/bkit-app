@@ -15,6 +15,7 @@ const { height } = Dimensions.get("window");
 function HomeScreen(props) {
   const [buckitItems, setBuckitItems] = useState([]);
   const [percentDone, setPercentDone] = useState(0);
+  const [isLoading, setLoading] = useState(true);
 
   // this effect should never be called more than once,
   // so we pass an empty array
@@ -31,6 +32,7 @@ function HomeScreen(props) {
     }
     setBuckitItems(res.data.items);
     setPercentDone(res.data.completionPercentage);
+    setLoading(false);
   }
 
   return (
@@ -63,7 +65,7 @@ function HomeScreen(props) {
         </View>
         <LoadingBar percent={percentDone} />
       </View>
-      <Graph items={buckitItems} />
+      <Graph isLoading={isLoading} items={buckitItems} />
       <BottomDrawer
         downDisplay={height / 2}
         containerHeight={height}
@@ -77,7 +79,8 @@ function HomeScreen(props) {
           contentContainerStyle={{
             backgroundColor: "#F9F9F9",
             borderRadius: 40,
-            alignItems: "center"
+            alignItems: "center",
+            minHeight: 60
           }}
           bounces={false}
           showsVerticalScrollIndicator={false}
