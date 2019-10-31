@@ -73,7 +73,7 @@ export default function Graph(props) {
             <View style={styles.bubble}>
               <Text style={styles.title}>{item.count}</Text>
               <Text style={styles.text}>
-                {item.count == 1 ? "buck given" : "bucks given"}
+                {item.count === 1 ? "buck given" : "bucks given"}
               </Text>
             </View>
           )}

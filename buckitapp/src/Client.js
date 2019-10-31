@@ -84,10 +84,10 @@ export default class Client {
 
     // attempt the request
     let res = await Client.request(config);
-    if (res.status == 401) {
+    if (res.status === 401) {
       // JWT is invalid, get a new one
       const refreshRes = await Client.authRefresh();
-      if (refreshRes.status == 200) {
+      if (refreshRes.status === 200) {
         jwtoken = await AsyncStorage.getItem("@jwtoken");
         config.headers["x-auth-token"] = jwtoken;
         // reattempt request
