@@ -5,50 +5,34 @@ import LoadingBar from "../../Components/LoadingBar";
 import Logo from "../../Components/Logo";
 import Graph from "../../Components/Graph";
 import { ListItem, Image } from "react-native-elements";
-import Axios from "axios";
-import AsyncStorage from "@react-native-community/async-storage";
 import Checkmark from "../../Components/Checkmark";
 import ChevronButton from "../../Components/ChevronButton";
 import Chevron from "../../Components/Chevron";
-import keys from "../../keys";
+import Client from "../../Client";
 
 const { height } = Dimensions.get("window");
 
 function HomeScreen(props) {
   const [buckitItems, setBuckitItems] = useState([]);
   const [percentDone, setPercentDone] = useState(0);
+  const [isLoading, setLoading] = useState(true);
 
   // this effect should never be called more than once,
   // so we pass an empty array
   useEffect(() => {
-    getBuckitItems();
+    loadUserHome();
   }, []);
-  async function getBuckitItems() {
-    try {
-      console.log("GET /user/home");
-      const jwt = await AsyncStorage.getItem("@jwtoken");
-      if (!jwt) {
-        this.props.navigation.navigate("Loading");
-      }
-      const instance = Axios.create({
-        baseURL: keys.BASE_URL,
-        headers: { "x-auth-token": jwt }
-      });
-      console.log(jwt);
-      const res = await instance.get("/user/home");
-      if (res.status === 200) {
-        // Request succeeded
-        setBuckitItems(res.data.items);
-        setPercentDone(res.data.completionPercentage);
-      } else {
-        // User does not exist: sending to sign up page
-        props.navigation.navigate("SignUp");
-      }
-    } catch (err) {
-      const msg = err + " -- " + err.response.data.message;
-      alert(msg);
-      console.log(msg);
+
+  async function loadUserHome() {
+    const res = await Client.userHome();
+    if (res.status !== 200) {
+      alert("Error loading Buckit items: " + res.status);
+      props.navigation.navigate("Login");
+      return;
     }
+    setBuckitItems(res.data.items);
+    setPercentDone(res.data.completionPercentage);
+    setLoading(false);
   }
 
   return (
@@ -74,7 +58,7 @@ function HomeScreen(props) {
         </View>
         <LoadingBar percent={percentDone} />
       </View>
-      <Graph items={buckitItems} />
+      <Graph isLoading={isLoading} items={buckitItems} />
       <BottomDrawer
         downDisplay={height / 2}
         containerHeight={height}
@@ -96,7 +80,7 @@ function HomeScreen(props) {
               key={i}
               style={styles.listItem}
               containerStyle={styles.listItemContainer}
-              rightIcon={<Checkmark done={item.done}/>}
+              rightIcon={<Checkmark done={item.done} />}
               leftElement={
                 <View
                   style={{
@@ -183,6 +167,7 @@ const styles = StyleSheet.create({
   scrollViewContainer: {
     backgroundColor: "#F9F9F9",
     borderRadius: 40,
+    minHeight: 55,
     alignItems: "center"
   },
   bottomDrawer: {
@@ -203,7 +188,7 @@ const styles = StyleSheet.create({
     padding: 0,
     shadowOffset: { width: 0.3, height: 0.3 },
     shadowOpacity: 0.25
-  },
+  }
 });
 
 export default HomeScreen;

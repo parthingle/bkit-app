@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableHighlight
 } from "react-native";
+import Spinner from "./Spinner";
 
 export default function Graph(props) {
   const counts = {};
@@ -72,7 +73,7 @@ export default function Graph(props) {
             <View style={styles.bubble}>
               <Text style={styles.title}>{item.count}</Text>
               <Text style={styles.text}>
-                {item.count == 1 ? "buck given" : "bucks given"}
+                {item.count === 1 ? "buck given" : "bucks given"}
               </Text>
             </View>
           )}
@@ -91,14 +92,18 @@ export default function Graph(props) {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        inverted={true}
-        ItemSeparatorComponent={() => <View />}
-        data={data}
-        renderItem={renderItem}
-      />
+      {props.isLoading ? (
+        <Spinner />
+      ) : (
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          inverted={true}
+          ItemSeparatorComponent={() => <View />}
+          data={data}
+          renderItem={renderItem}
+        />
+      )}
     </View>
   );
 }
