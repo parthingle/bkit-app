@@ -5,14 +5,10 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 export default function Bars(props) {
   return (
     <View style={styles.container}>
-      <View style={[styles.bar, styles.bar1]}>
-        <TouchableOpacity onPress={() => props.onAuth()}>
-          <Text style={[styles.textLogin, { color: "#FEDBA6" }]}>LOG IN</Text>
-        </TouchableOpacity>
-      </View>
+      <View style={[styles.bar, styles.bar1]}></View>
       <View style={[styles.bar, styles.bar2]}>
         <TouchableOpacity onPress={() => props.onAuth()}>
-          <Text style={[styles.textLogin, { color: "#FDB17F" }]}>LOG IN</Text>
+          <Text style={[styles.textLogin, { color: "#FF945B" }]}>SIGN UP</Text>
         </TouchableOpacity>
       </View>
       <View style={[styles.bar, styles.bar3]}>
@@ -20,6 +16,7 @@ export default function Bars(props) {
           <Text style={[styles.textLogin, { color: "#FFF6C0" }]}>LOG IN</Text>
         </TouchableOpacity>
       </View>
+      <View style={[styles.bar, styles.bar4]}></View>
     </View>
   );
 }
@@ -42,18 +39,21 @@ const styles = StyleSheet.create({
   },
   bar1: {
     backgroundColor: "#FFF6C0",
-    bottom: 140
-    // height:
+    bottom: 210
   },
   bar2: {
     backgroundColor: "#FEDBA6",
-    bottom: 70,
+    bottom: 140,
     alignItems: "center"
   },
   bar3: {
     backgroundColor: "#FDB17F",
-    bottom: 0,
+    bottom: 70,
     alignItems: "center"
+  },
+  bar4: {
+    backgroundColor: "#FF945B",
+    bottom: 0
   },
   textLogin: {
     fontFamily: "Futura",
