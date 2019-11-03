@@ -131,7 +131,12 @@ function HomeScreen(props) {
                 fontSize: 11,
                 color: "rgba(118, 118, 118, 0.47)"
               }}
-              onPress={() => props.navigation.navigate("ItemScreen", { item })}
+              onPress={() =>
+                props.navigation.navigate("ItemScreen", {
+                  item,
+                  onRefresh: loadUserHome
+                })
+              }
             />
           ))}
         </ScrollView>
@@ -139,10 +144,6 @@ function HomeScreen(props) {
       </BottomDrawer>
     </View>
   );
-}
-
-function useBuckitItems() {
-  return buckitItems;
 }
 
 const styles = StyleSheet.create({

@@ -10,22 +10,17 @@ function randomBucketedMessage() {
   var messages = [
     "You bucked it up!",
     "That was bucking awesome!",
-    "What the buck?",
+    "What the buck!?",
     "You buck sh!t up",
-    "You're doing great honey",
-    "For buck's sake",
+    "For buck's sake!",
     "Holy buck!"
   ];
   return messages[Math.floor(Math.random() * messages.length)];
 }
 
-function randomFace() {
-  var faces = [":O", ";)", ":P", "¯\\_(ツ)_/¯"];
-  return faces[Math.floor(Math.random() * faces.length)];
-}
-
 export default function ItemScreen(props) {
   const item = props.navigation.getParam("item");
+  const onRefresh = props.navigation.getParam("onRefresh");
 
   async function buckItem() {
     const res = await Client.itemBuck(item.itemId);
@@ -38,14 +33,19 @@ export default function ItemScreen(props) {
       return;
     }
 
-    Alert.alert(randomBucketedMessage(), randomFace(), [
-      {
-        text: "Ok",
-        onPress: () => {
-          props.navigation.dispatch(StackActions.pop());
+    Alert.alert(
+      randomBucketedMessage(),
+      "You completed this bucket list item.",
+      [
+        {
+          text: "Ok",
+          onPress: () => {
+            onRefresh();
+            props.navigation.dispatch(StackActions.pop());
+          }
         }
-      }
-    ]);
+      ]
+    );
   }
 
   const {
