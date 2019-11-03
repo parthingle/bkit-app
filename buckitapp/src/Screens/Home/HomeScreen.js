@@ -9,6 +9,7 @@ import Checkmark from "../../Components/Checkmark";
 import ChevronButton from "../../Components/ChevronButton";
 import Chevron from "../../Components/Chevron";
 import Client from "../../Client";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const { height } = Dimensions.get("window");
 
@@ -94,28 +95,17 @@ function HomeScreen(props) {
                     flexDirection: "row",
                     backgroundColor:
                       "rgba(105, 201, 203," +
-                      (Math.sin((i % 6) / 7) + 0.2) +
+                      (Math.sin((i % 6) / 7) + 0.4) +
                       " )"
                   }}
                 >
-                  <Image
-                    source={{
-                      uri:
-                        item.album[0] ||
-                        "https://upload.wikimedia.org/wikipedia/commons/a/ad/Royce_Hall_post_rain.jpg"
-                    }}
-                    style={{
-                      width: 60,
-                      height: 60,
-                      backgroundColor: "rgba(0,0,0,0)"
-                    }}
-                  />
+                  <Icon name="cutlery" size={35} color="#FFF" />
                   <Chevron
                     height={80}
                     color={["#FFF6C0", "#FEDBA6", "#FDB17F", "#FD9268"][i % 4]}
                     style={{
                       transform: [{ rotate: "180deg" }],
-                      left: 10
+                      left: 25
                     }}
                   />
                 </View>
