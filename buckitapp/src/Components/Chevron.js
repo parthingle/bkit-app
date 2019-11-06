@@ -15,10 +15,9 @@ const Chevron = props => {
 };
 
 Chevron.defaultProps = {
-  height: 40
+  height: 40,
+  width: 6
 };
-
-const width = 6;
 
 const getStyles = props =>
   StyleSheet.create({
@@ -33,7 +32,7 @@ const getStyles = props =>
     },
     chevronTriangle: {
       backgroundColor: "transparent",
-      borderRightWidth: width,
+      borderRightWidth: props.width,
       borderBottomWidth: 0,
       borderLeftWidth: 0,
       borderTopWidth: props.height / 2,
@@ -44,24 +43,24 @@ const getStyles = props =>
     },
     chevronTopLeft: {
       position: "absolute",
-      right: -width,
+      right: -props.width,
       top: 0
     },
     chevronTopRight: {
       position: "absolute",
-      right: -width,
+      right: -props.width,
       bottom: 0,
       transform: [{ scaleY: -1 }]
     },
     chevronBottomLeft: {
       position: "absolute",
-      left: -width,
+      left: -props.width,
       top: 0,
       transform: [{ scale: -1 }]
     },
     chevronBottomRight: {
       position: "absolute",
-      left: -width,
+      left: -props.width,
       bottom: 0,
       transform: [{ scaleX: -1 }]
     }
