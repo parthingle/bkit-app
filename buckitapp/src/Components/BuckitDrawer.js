@@ -47,32 +47,51 @@ export default function BuckitDrawer(props) {
               containerStyle={styles.listItemContainer}
               rightIcon={<Checkmark done={item.done} />}
               leftElement={
-                <View
-                  style={{
-                    margin: 0,
-                    padding: 0,
-                    height: 80,
-                    width: 80,
-                    borderRadius: 10,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexDirection: "row",
-                    backgroundColor:
-                      "rgba(105, 201, 203," +
-                      (Math.sin((i % 6) / 10) + 0.4) +
-                      " )"
-                  }}
-                >
-                  <Icon name="cutlery" size={35} color="#FFF" />
+                <React.Fragment>
+                  <View
+                    style={{
+                      margin: 0,
+                      padding: 0,
+                      height: 80,
+                      width: 80,
+                      borderRadius: 10,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexDirection: "row",
+                      backgroundColor:
+                        "rgba(105, 201, 203," +
+                        [0.8, 0.7, 0.6, 0.7][i % 4] +
+                        " )"
+                    }}
+                  >
+                    <Icon
+                      name={
+                        [
+                          "coffee",
+                          "suitcase",
+                          "bullhorn",
+                          "book",
+                          "shopping-bag",
+                          "bicycle",
+                          "binoculars",
+                          "cutlery",
+                          "taxi",
+                          "compass"
+                        ][i % 10]
+                      }
+                      size={30}
+                      color="#FFF"
+                    />
+                  </View>
                   <Chevron
+                    width={8}
                     height={80}
                     color={["#FFF6C0", "#FEDBA6", "#FDB17F", "#FD9268"][i % 4]}
                     style={{
-                      transform: [{ rotate: "180deg" }],
-                      left: 25
+                      transform: [{ rotate: "180deg" }]
                     }}
                   />
-                </View>
+                </React.Fragment>
               }
               title={item.title}
               titleStyle={{
