@@ -3,7 +3,13 @@ import { TouchableOpacity, View, Text } from "react-native";
 
 export default function Button(props) {
   return (
-    <TouchableOpacity onPress={props.onPress}>
+    <TouchableOpacity
+      onPress={props.onPress}
+      style={{
+        shadowOffset: { width: 0.3, height: 0.3 },
+        shadowOpacity: 0.25
+      }}
+    >
       <View
         style={[
           {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Modal } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import LoadingBar from "../../Components/LoadingBar";
 import Logo from "../../Components/Logo";
 import Graph from "../../Components/Graph";
@@ -36,7 +36,21 @@ export default function HomeScreen(props) {
         <View style={styles.headerConstantsContainer}>
           <ChevronButton
             style={{ right: 40, top: 15, opacity: 1 }}
-            onPress={() => props.navigation.navigate("Settings")}
+            onPress={() => {
+              Alert.alert("Are you sure you want to log out?", null, [
+                {
+                  text: "Cancel",
+                  style: "cancel"
+                },
+                {
+                  text: "Log Out",
+                  style: "destructive",
+                  onPress: () => {
+                    props.navigation.navigate("Login");
+                  }
+                }
+              ]);
+            }}
           />
           <Logo
             style={{

@@ -161,9 +161,7 @@ export default function ItemScreen(props) {
           title="buck it"
           onPress={buckItem}
           style={{
-            bottom: 25,
-            shadowOpacity: 0.05,
-            shadowRadius: 3
+            bottom: 25
           }}
         />
       )}
