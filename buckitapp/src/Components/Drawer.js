@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { PanResponder, Animated, Dimensions, View } from "react-native";
+import { PanResponder, Animated, Dimensions } from "react-native";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -16,32 +16,22 @@ export default class Drawer extends Component {
   constructor(props) {
     super(props);
 
-    this.topBounds = {
-      x: 0,
-      y: this.props.offset
-    };
+    this.topY = this.props.offset;
+    this.bottomY = 0;
 
-    const currentPosition = this.topBounds;
+    this.pan = new Animated.ValueXY({ x: 0, y: this.topY });
+    this.panY = this.topY;
+    this.pan.addListener(({ x, y }) => {
+      this.panY = y;
+    });
+    this.panStartY = 0;
 
     this.state = {
-      y: currentPosition.y,
-      y0: currentPosition.y,
-      bottomBounds: 0,
-      height: this.props.offset
+      height: this.topY
     };
 
-    this.position = new Animated.ValueXY(currentPosition);
-    this.position.addListener(({ x, y }) => {
-      this.setState({ y });
-    });
-
-    this._panResponder = PanResponder.create({
-      onMoveShouldSetPanResponder: (e, gesture) => {
-        const dx2 = gesture.dx * gesture.dx;
-        const dy2 = gesture.dy * gesture.dy;
-        const dh = Math.sqrt(dx2 + dy2);
-        return Math.abs(dh) > 0.001;
-      },
+    this.panResponder = PanResponder.create({
+      onMoveShouldSetPanResponder: this.handleMoveShouldSetPanResponder,
       onPanResponderGrant: this.handlePanResponderGrant,
       onPanResponderMove: this.handlePanResponderMove,
       onPanResponderRelease: this.handlePanResponderRelease
@@ -49,62 +39,74 @@ export default class Drawer extends Component {
   }
 
   componentWillUnmount() {
-    this.position.stopAnimation();
-    this.position.removeAllListeners();
+    this.pan.stopAnimation();
+    this.pan.removeAllListeners();
   }
 
   render() {
+    if (this.topY !== this.props.offset) {
+      this.topY = this.props.offset;
+      this.pan.setValue({ x: 0, y: this.topY });
+    }
+
     return (
       <Animated.View
         onLayout={event => {
           const { height } = event.nativeEvent.layout;
-          const bottomBounds = this.topBounds.y - height + this.props.offset;
-          this.setState({ bottomBounds, height });
+          this.bottomY = SCREEN_HEIGHT - height;
+          this.setState({ height });
         }}
         style={{
-          ...this.position.getLayout(),
+          ...this.pan.getLayout(),
           left: 0,
-          ...styles.animationContainer(this.state.height),
+          width: SCREEN_WIDTH,
+          minHeight: SCREEN_HEIGHT - this.props.offset,
+          position: "absolute",
           ...this.props.style
         }}
-        {...this._panResponder.panHandlers}
+        {...this.panResponder.panHandlers}
       >
         {this.props.children}
-        <View height={10}></View>
       </Animated.View>
     );
   }
+
+  handleMoveShouldSetPanResponder = (e, gesture) => {
+    const dx2 = gesture.dx * gesture.dx;
+    const dy2 = gesture.dy * gesture.dy;
+    const dh = Math.sqrt(dx2 + dy2);
+    return Math.abs(dh) > 0.001;
+  };
+
   handlePanResponderGrant = (e, gesture) => {
-    this.setState({ y0: this.state.y });
+    this.panStartY = this.panY;
   };
 
   handlePanResponderMove = (e, gesture) => {
-    let newY = this.state.y0 + gesture.dy;
-    if (newY > this.topBounds.y) {
-      newY = this.topBounds.y + Math.sqrt(Math.abs(gesture.dy * 10));
-    } else if (newY <= this.state.bottomBounds) {
-      newY = this.state.bottomBounds - Math.sqrt(Math.abs(gesture.dy * 10));
+    let panNewY = this.panStartY + gesture.dy;
+    if (panNewY > this.topY) {
+      panNewY = this.topY + Math.sqrt(Math.abs(gesture.dy * 10));
+    } else if (panNewY <= this.bottomY) {
+      panNewY = this.bottomY - Math.sqrt(Math.abs(gesture.dy * 10));
     }
-    this.setState({ y: newY }, () => {
-      this.position.setValue({ y: newY });
-    });
+    this.pan.setValue({ y: panNewY });
   };
 
   handlePanResponderRelease = (e, gesture) => {
-    let newY = this.state.y0 + gesture.dy;
-    if (newY >= this.topBounds.y - this.props.threshold) {
-      Animated.spring(this.position, {
-        toValue: this.topBounds
+    let panNewY = this.panStartY + gesture.dy;
+    if (panNewY >= this.topY - this.props.threshold) {
+      Animated.spring(this.pan, {
+        toValue: { x: 0, y: this.topY }
       }).start();
-    } else if (newY <= this.state.bottomBounds) {
-      Animated.spring(this.position, {
+    } else if (panNewY <= this.bottomY) {
+      Animated.spring(this.pan, {
         toValue: {
           x: 0,
-          y: this.state.bottomBounds
+          y: this.bottomY
         }
       }).start();
     } else {
-      Animated.decay(this.position, {
+      Animated.decay(this.pan, {
         velocity: { x: 0, y: gesture.vy }
       }).start();
     }
@@ -112,17 +114,14 @@ export default class Drawer extends Component {
     // spring it back into place after a delay
     setTimeout(
       () =>
-        this.position.stopAnimation(({ x, y }) => {
-          if (y >= this.topBounds.y - this.props.threshold) {
-            Animated.spring(this.position, {
-              toValue: this.topBounds
+        this.pan.stopAnimation(({ x, y }) => {
+          if (y >= this.topY - this.props.threshold) {
+            Animated.spring(this.pan, {
+              toValue: { x: 0, y: this.topY }
             }).start();
-          } else if (y <= this.state.bottomBounds) {
-            Animated.spring(this.position, {
-              toValue: {
-                x: 0,
-                y: this.state.bottomBounds
-              }
+          } else if (y <= this.bottomY) {
+            Animated.spring(this.pan, {
+              toValue: { x: 0, y: this.bottomY }
             }).start();
           }
         }),
@@ -130,25 +129,3 @@ export default class Drawer extends Component {
     );
   };
 }
-
-const styles = {
-  animationContainer: height => {
-    return {
-      width: SCREEN_WIDTH,
-      minHeight: height,
-      position: "absolute"
-    };
-  }
-};
-
-// Animated.spring(this.position, {
-//   toValue: {
-//     x: 0,
-//     y:
-//       this.state.y <= this.state.bottomBounds
-//         ? this.state.bottomBounds
-//         : this.state.y >= this.topBounds.y
-//         ? this.topBounds.y
-//         : this.state.y
-//   }
-// });
