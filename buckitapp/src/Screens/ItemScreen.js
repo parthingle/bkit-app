@@ -156,15 +156,16 @@ export default function ItemScreen(props) {
         </View>
         <View style={{ height: 50 }} />
       </ScrollView>
-      {!item.done && (
+      {
         <Button
-          title="buck it"
+          title={!item.done ? "buck it" : "already bucked!"}
+          disabled={item.done ? true : false}
           onPress={buckItem}
           style={{
             bottom: 25
           }}
         />
-      )}
+      }
     </View>
   );
 }
