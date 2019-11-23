@@ -4,13 +4,22 @@ import { ListItem } from "react-native-elements";
 import Checkmark from "./Checkmark";
 import Chevron from "./Chevron";
 import ChevronButton from "./ChevronButton";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { View, StyleSheet } from "react-native";
 
 export default function BuckitDrawer(props) {
   const [offset, setOffset] = useState(0);
   const buckitItems = props.items;
   const { loadUserHome } = props;
+  const categoryToIconMap = {
+    Food: "silverware",
+    Outdoors: "hiking",
+    Shopping: "shopping",
+    "Night Life": "weather-night",
+    Art: "brush",
+    Advocacy: "flower-tulip-outline",
+    UCLA: "school"
+  };
   return (
     <React.Fragment>
       <View
@@ -65,20 +74,7 @@ export default function BuckitDrawer(props) {
                     }}
                   >
                     <Icon
-                      name={
-                        [
-                          "coffee",
-                          "suitcase",
-                          "bullhorn",
-                          "book",
-                          "shopping-bag",
-                          "bicycle",
-                          "binoculars",
-                          "cutlery",
-                          "taxi",
-                          "compass"
-                        ][i % 10]
-                      }
+                      name={categoryToIconMap[`${item.category}`]}
                       size={30}
                       color="#FFF"
                     />
