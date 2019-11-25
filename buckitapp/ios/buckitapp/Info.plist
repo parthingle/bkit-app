@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>5</string>
 	<key>FacebookAppID</key>
 	<string>765646803828688</string>
 	<key>FacebookDisplayName</key>
@@ -58,13 +58,13 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Your message to user when the camera is accessed for the first time</string>
+	<string>Allow permission to use the Camera to Buckit new items</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string>Allow permission to use Location Data to geotag your Buckit</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Your message to user when the microphone is accessed for the first time</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Your message to user when the photo library is accessed for the first time</string>
+	<string>Allo access to Camera Roll to upload new buckits</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pacifico.ttf</string>

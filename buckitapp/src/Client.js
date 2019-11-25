@@ -12,6 +12,12 @@ export default class Client {
     });
   }
 
+  static async unbuckItem(itemId) {
+    return await Client.requestWithAuth({
+      method: "post",
+      url: "/item/unbuck/" + itemId
+    });
+  }
   static async userHome() {
     return await Client.requestWithAuth({
       method: "get",
@@ -22,6 +28,7 @@ export default class Client {
   /* Authentication endpoints */
 
   static async authFacebook(fat) {
+    alert();
     const config = {
       method: "post",
       url: "/auth/facebook",

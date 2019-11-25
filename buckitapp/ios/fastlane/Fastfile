@@ -14,7 +14,7 @@
 # update_fastlane
 
 default_platform(:ios)
-
+ruby_version("2.6.3")
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do

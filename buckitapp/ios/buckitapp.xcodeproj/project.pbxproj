@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -42,6 +43,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* buckitappTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* buckitappTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		364E06697ECC4580AF4C69D1 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FA87F467C864741B14B1420 /* SimpleLineIcons.ttf */; };
+		3970EE7E30A942FA8CCEB62C /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF1A9F0C4EE44D4CB89A4C63 /* Fontisto.ttf */; };
 		3C33E9DC3496490A969CD1C1 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF90E95A5B345C28556A7D8 /* FBSDKShareKit.framework */; };
 		47B8E953ED674325ACD342FA /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF5A30EFBAAA41CCA24668E4 /* libRNCamera.a */; };
 		495358D1C3D647CC98FB5B3C /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F0E9D0317EDF405A86C544CC /* SF-Pro-Display-Regular.otf */; };
@@ -67,7 +69,6 @@
 		E5642253D319426686BA7F58 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DDDF0B59F0F4F90B4290EAC /* FontAwesome5_Brands.ttf */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
-		3970EE7E30A942FA8CCEB62C /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF1A9F0C4EE44D4CB89A4C63 /* Fontisto.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -453,11 +454,11 @@
 		EA47628FF6344DA4A2EE6876 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		EF1A9F0C4EE44D4CB89A4C63 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		F0E9D0317EDF405A86C544CC /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Regular.otf"; path = "../assets/fonts/Pacifico/SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
 		F1DDB4CF3AD449FCB2544A07 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		F4A0B9CB78564325A5D1FD65 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		F8B2666FC43346A6A4F401CA /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
-		EF1A9F0C4EE44D4CB89A4C63 /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -914,7 +915,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = PKFYX42KS2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1559,8 +1560,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 5;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = PKFYX42KS2;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
@@ -1581,7 +1582,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.buckitapp;
 				PRODUCT_NAME = buckitapp;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.buckitapp";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1590,9 +1591,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = PKFYX42KS2;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
 				HEADER_SEARCH_PATHS = (
@@ -1612,7 +1613,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.buckitapp;
 				PRODUCT_NAME = buckitapp;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.buckitapp";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
