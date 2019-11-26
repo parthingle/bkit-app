@@ -4,7 +4,7 @@ import { ListItem } from "react-native-elements";
 import Checkmark from "./Checkmark";
 import Chevron from "./Chevron";
 import ChevronButton from "./ChevronButton";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import { View, StyleSheet } from "react-native";
 
 export default function BuckitDrawer(props) {
@@ -74,7 +74,7 @@ export default function BuckitDrawer(props) {
                     }}
                   >
                     <Icon
-                      name={categoryToIconMap[`${item.category}`]}
+                      name={getIcon(item.category)}
                       size={30}
                       color="#FFF"
                     />
@@ -113,6 +113,27 @@ export default function BuckitDrawer(props) {
       </Drawer>
     </React.Fragment>
   );
+}
+
+function getIcon(category) {
+  switch(category) {
+    case 'UCLA':
+      return 'paw';
+    case 'Food':
+      return 'utensils';
+    case 'Outdoors':
+      return 'hiking';
+    case 'Shopping':
+      return 'shopping-bag';
+    case 'Nightlife':
+      return 'beer';
+    case 'Art':
+      return 'palette';
+    case 'Advocacy':
+      return 'heart';
+    default:
+      return 'paw';
+  }
 }
 
 const styles = StyleSheet.create({
