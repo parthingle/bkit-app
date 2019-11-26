@@ -8,14 +8,17 @@ export default class Client {
   static async itemBuck(itemId) {
     return await Client.requestWithAuth({
       method: "post",
-      url: "/item/buck/" + itemId
+      url: "/item/buck",
+      params: {
+        id: itemId
+      }
     });
   }
 
-  static async unbuckItem(itemId) {
+  static async itemUnbuck(itemId) {
     return await Client.requestWithAuth({
       method: "post",
-      url: "/item/unbuck/" + itemId
+      url: `/item/unbuck/${itemId}`
     });
   }
   static async userHome() {
@@ -28,7 +31,6 @@ export default class Client {
   /* Authentication endpoints */
 
   static async authFacebook(fat) {
-    alert();
     const config = {
       method: "post",
       url: "/auth/facebook",
@@ -67,18 +69,35 @@ export default class Client {
 
   /* Helper functions */
 
-  // makes a request and log it
+  // makes a request, logs it, and creates an error message if there is an error
   static async request(config) {
-    console.log(config.method + " " + config.url);
-
     config.baseURL = keys.BASE_URL;
-    config.validateStatus = function(status) {
-      // don't reject any status code
-      return true;
-    };
-    const res = await axios(config);
-    console.log(config.method + " " + config.url + ": " + res.status);
-    return res;
+    try {
+      const response = await axios(config);
+      console.log(config.method + " " + config.url + ": " + response.status);
+      return response;
+    } catch (error) {
+      if (error.response) {
+        // The response is not 2XX
+        console.log(
+          config.method + " " + config.url + ": " + error.response.status
+        );
+        console.log(error.response);
+        error.response.errorMessage =
+          "Received bad response: " + error.response.status;
+        return error.response;
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.log(config.method + " " + config.url + ": No response");
+        console.log(error.message);
+        return { status: 600, errorMessage: error.message };
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log(config.method + " " + config.url + ": Failed request");
+        console.log(error.message);
+        return { status: 601, errorMessage: error.message };
+      }
+    }
   }
 
   // make a request with authentication and reauthenticate if needed
