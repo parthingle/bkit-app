@@ -1,5 +1,12 @@
-import React from "react";
-import { Text, View, Image, ScrollView, Alert } from "react-native";
+import React, { useState } from "react";
+import {
+  Text,
+  View,
+  Image,
+  ScrollView,
+  Alert,
+  DatePickerIOS
+} from "react-native";
 import { StackActions } from "react-navigation";
 import CircleBar from "../Components/CircleBar";
 import Button from "../Components/Button";
@@ -21,9 +28,14 @@ function randomBucketedMessage() {
 export default function ItemScreen(props) {
   const item = props.navigation.getParam("item");
   const onRefresh = props.navigation.getParam("onRefresh");
+  const [date, setDate] = useState(new Date());
+  const [showDate, toggleShowDate] = useState(false);
+  function toggleShowDateMain() {
+    toggleShowDate(!showDate);
+  }
 
   async function buckItem() {
-    const res = await Client.itemBuck(item.itemId);
+    const res = await Client.itemBuck(item.itemId, date.getTime());
     if (res.status === 401) {
       alert("Error authenticating user: " + res.status);
       props.navigation.navigate("Login");
@@ -83,109 +95,121 @@ export default function ItemScreen(props) {
   const uri = album[0];
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "#FEFDF4",
-        alignItems: "center"
-      }}
-    >
+    <View style={{ flex: 1 }}>
       <View
         style={{
-          width: "100%",
-          height: 100,
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexDirection: "row",
-          shadowRadius: 30,
-          paddingTop: 35,
-          paddingLeft: 10,
-          paddingRight: 10
+          flex: 1,
+          backgroundColor: "#FEFDF4",
+          alignItems: "center"
         }}
       >
-        <ChevronButton onPress={() => props.navigation.goBack()} />
-        <Text
+        <View
           style={{
-            fontFamily: "Pacifico",
-            color: "#67B4B0",
-            fontSize: 28
+            width: "100%",
+            height: 100,
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexDirection: "row",
+            shadowRadius: 30,
+            paddingTop: 35,
+            paddingLeft: 10,
+            paddingRight: 10
           }}
         >
-          {title}
-        </Text>
-        <Text style={{ fontSize: 30, opacity: 0 }}>⇦</Text>
-      </View>
-      <ScrollView
-        style={{ width: "100%" }}
-        horizontal={false}
-        showsVerticalScrollIndicator={false}
-        overScrollMode="never"
-      >
-        <Image
-          style={{ width: "100%", height: 300 }}
-          source={{
-            uri:
-              uri ||
-              "https://upload.wikimedia.org/wikipedia/commons/a/ad/Royce_Hall_post_rain.jpg"
-          }}
-        />
-        <CircleBar
-          data={usersWhoBucketed.map(user => {
-            if (user.length < 2) {
-              return "??";
-            }
-            return (
-              String.fromCharCode(65 + Number(user[0])) +
-              String.fromCharCode(65 + Number(user[1]))
-            );
-          })}
-          style={{
-            marginTop: 10,
-            marginBottom: 10,
-            shadowOpacity: 0.05,
-            shadowRadius: 3
-          }}
-        />
-        <View style={{ padding: 10, top: -20 }}>
-          {text.map(([title, content], i) => {
-            return (
-              <View key={i}>
-                <Text
-                  style={{
-                    fontFamily: "SF Pro Display",
-                    fontSize: 26,
-                    color: "#67B4B0",
-                    paddingTop: 20,
-                    paddingBottom: 10
-                  }}
-                >
-                  {title}
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: "SF Pro Display",
-                    fontSize: 16,
-                    color: "#767676",
-                    lineHeight: 20
-                  }}
-                >
-                  {content}
-                </Text>
-              </View>
-            );
-          })}
+          <ChevronButton onPress={() => props.navigation.goBack()} />
+          <Text
+            style={{
+              fontFamily: "Pacifico",
+              color: "#67B4B0",
+              fontSize: 28
+            }}
+          >
+            {title}
+          </Text>
+          <Text style={{ fontSize: 30, opacity: 0 }}>⇦</Text>
         </View>
-        <View style={{ height: 50 }} />
-      </ScrollView>
-      {
+        <ScrollView
+          style={{ width: "100%" }}
+          horizontal={false}
+          showsVerticalScrollIndicator={false}
+          overScrollMode="never"
+        >
+          <Image
+            style={{ width: "100%", height: 300 }}
+            source={{
+              uri:
+                uri ||
+                "https://upload.wikimedia.org/wikipedia/commons/a/ad/Royce_Hall_post_rain.jpg"
+            }}
+          />
+          {/* <CircleBar
+            data={usersWhoBucketed.map(user => {
+              if (user.length < 2) {
+                return "??";
+              }
+              return (
+                String.fromCharCode(65 + Number(user[0])) +
+                String.fromCharCode(65 + Number(user[1]))
+              );
+            })}
+            style={{
+              marginTop: 10,
+              marginBottom: 10,
+              shadowOpacity: 0.05,
+              shadowRadius: 3
+            }}
+          /> */}
+          <View style={{ padding: 10, top: -20 }}>
+            {text.map(([title, content], i) => {
+              return (
+                <View key={i}>
+                  <Text
+                    style={{
+                      fontFamily: "SF Pro Display",
+                      fontSize: 26,
+                      color: "#67B4B0",
+                      paddingTop: 20,
+                      paddingBottom: 10
+                    }}
+                  >
+                    {title}
+                  </Text>
+                  <Text
+                    style={{
+                      fontFamily: "SF Pro Display",
+                      fontSize: 16,
+                      color: "#767676",
+                      lineHeight: 20
+                    }}
+                  >
+                    {content}
+                  </Text>
+                </View>
+              );
+            })}
+          </View>
+          <View style={{ height: 50 }} />
+        </ScrollView>
         <Button
           title={!item.done ? "buck it" : "un-buckit"}
           onPress={item.done ? unbuckItem : buckItem}
           style={{
             bottom: 25
           }}
+          done={item.done}
+          toggleShowDate={toggleShowDateMain}
         />
-      }
+      </View>
+      {showDate ? (
+        <DatePickerIOS
+          maximumDate={new Date()}
+          onDateChange={setDate}
+          date={date}
+          mode="date"
+        />
+      ) : (
+        <View />
+      )}
     </View>
   );
 }

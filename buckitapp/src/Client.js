@@ -5,10 +5,10 @@ import AsyncStorage from "@react-native-community/async-storage";
 export default class Client {
   /* REST endpoints */
 
-  static async itemBuck(itemId) {
+  static async itemBuck(itemId, timestamp) {
     return await Client.requestWithAuth({
       method: "post",
-      url: "/item/buck/" + itemId
+      url: "/item/buck" + `?id=${itemId}&timestamp=${timestamp}`
     });
   }
 
@@ -28,7 +28,6 @@ export default class Client {
   /* Authentication endpoints */
 
   static async authFacebook(fat) {
-    alert();
     const config = {
       method: "post",
       url: "/auth/facebook",
