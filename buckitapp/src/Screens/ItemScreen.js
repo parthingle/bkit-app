@@ -108,7 +108,7 @@ export default function ItemScreen(props) {
           style={{
             fontFamily: "Pacifico",
             color: "#67B4B0",
-            fontSize: 28
+            fontSize: 600 / Math.max(20, title.length)
           }}
         >
           {title}
