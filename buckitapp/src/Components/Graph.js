@@ -58,12 +58,13 @@ export default function Graph(props) {
     data.push({ month, key: i, count });
   }
   const [pressedMonth, setPressedMonth] = useState(null);
+  const [graphHeight, setGraphHeight] = useState(0);
 
   function renderItem({ item, separators }) {
     const isPressed = item.key === pressedMonth;
     const barColor = isPressed ? "#FDB17F" : "#C4C4C4";
     const textColor = isPressed ? "#FD9268" : "#767676";
-
+    const barHeight = 2 + 20 * item.count;
     return (
       <TouchableHighlight
         style={styles.barContainer}
@@ -74,18 +75,26 @@ export default function Graph(props) {
       >
         <View style={styles.barContainer}>
           {isPressed && (
-            <View style={styles.bubble}>
-              <Text style={styles.title}>{item.count}</Text>
-              <Text style={styles.text}>
-                {item.count === 1 ? "buck given" : "bucks given"}
-              </Text>
+            <View
+              style={{
+                zIndex: 1,
+                top: Math.max(graphHeight / 3, barHeight) - graphHeight / 3,
+                alignItems: "center"
+              }}
+            >
+              <View style={styles.bubble}>
+                <Text style={styles.title}>{item.count}</Text>
+                <Text style={styles.text}>
+                  {item.count === 1 ? "buck given" : "bucks given"}
+                </Text>
+              </View>
+              <View style={[styles.triangle, styles.arrowDown]} />
             </View>
           )}
-          {isPressed && <View style={[styles.triangle, styles.arrowDown]} />}
           <View
             style={[
               styles.bar,
-              { height: 2 + 20 * item.count, backgroundColor: barColor }
+              { height: barHeight, backgroundColor: barColor }
             ]}
           />
           <Text style={[styles.title, { color: textColor }]}>{item.month}</Text>
@@ -95,7 +104,13 @@ export default function Graph(props) {
   }
 
   return (
-    <View style={styles.container}>
+    <View
+      onLayout={event => {
+        const { height } = event.nativeEvent.layout;
+        setGraphHeight(height);
+      }}
+      style={styles.container}
+    >
       {props.isLoading ? (
         <Spinner />
       ) : (
@@ -146,7 +161,7 @@ const styles = StyleSheet.create({
   bubble: {
     padding: 3,
     minWidth: 70,
-    backgroundColor: "rgba(196, 196, 196, 0.34)",
+    backgroundColor: "rgb(220, 220, 220)",
     borderRadius: 4,
     alignItems: "center",
     justifyContent: "center"
@@ -163,7 +178,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 10,
     borderBottomWidth: 0,
     borderLeftWidth: 10,
-    borderTopColor: "rgba(196, 196, 196, 0.34)",
+    borderTopColor: "rgb(220, 220, 220)",
     borderRightColor: "transparent",
     borderBottomColor: "transparent",
     borderLeftColor: "transparent"
