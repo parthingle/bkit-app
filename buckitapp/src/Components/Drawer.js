@@ -21,8 +21,27 @@ export default class Drawer extends Component {
 
     this.pan = new Animated.ValueXY({ x: 0, y: this.topY });
     this.panY = this.topY;
-    this.pan.addListener(({ x, y }) => {
+    this.isReturning = false;
+    this.isPanning = false;
+    this.pan.addListener(({ y }) => {
       this.panY = y;
+      if (y >= this.topY && !this.isReturning) {
+        this.pan.stopAnimation();
+        this.isReturning = true;
+        Animated.spring(this.pan, {
+          toValue: { x: 0, y: this.topY }
+        }).start(() => {
+          this.isReturning = false;
+        });
+      } else if (y <= this.bottomY && !this.isReturning) {
+        this.pan.stopAnimation();
+        this.isReturning = true;
+        Animated.spring(this.pan, {
+          toValue: { x: 0, y: this.bottomY }
+        }).start(() => {
+          this.isReturning = false;
+        });
+      }
     });
     this.panStartY = 0;
 
@@ -72,10 +91,10 @@ export default class Drawer extends Component {
   }
 
   handleMoveShouldSetPanResponder = (e, gesture) => {
-    const dx2 = gesture.dx * gesture.dx;
-    const dy2 = gesture.dy * gesture.dy;
-    const dh = Math.sqrt(dx2 + dy2);
-    return Math.abs(dh) > 0.001;
+    const vx2 = gesture.vx * gesture.vx;
+    const vy2 = gesture.vy * gesture.vy;
+    const vh = Math.sqrt(vx2 + vy2);
+    return this.isPanning || Math.abs(vh) > 0.1;
   };
 
   handlePanResponderGrant = (e, gesture) => {
@@ -94,6 +113,7 @@ export default class Drawer extends Component {
 
   handlePanResponderRelease = (e, gesture) => {
     let panNewY = this.panStartY + gesture.dy;
+    this.isPanning = true;
     if (panNewY >= this.topY - this.props.threshold) {
       Animated.spring(this.pan, {
         toValue: { x: 0, y: this.topY }
@@ -110,22 +130,11 @@ export default class Drawer extends Component {
         velocity: { x: 0, y: gesture.vy }
       }).start();
     }
-    // if the pan manages to flick the Drawer out of bounds,
-    // spring it back into place after a delay
-    setTimeout(
-      () =>
-        this.pan.stopAnimation(({ x, y }) => {
-          if (y >= this.topY - this.props.threshold) {
-            Animated.spring(this.pan, {
-              toValue: { x: 0, y: this.topY }
-            }).start();
-          } else if (y <= this.bottomY) {
-            Animated.spring(this.pan, {
-              toValue: { x: 0, y: this.bottomY }
-            }).start();
-          }
-        }),
-      1000
-    );
+    const vx2 = gesture.vx * gesture.vx;
+    const vy2 = gesture.vy * gesture.vy;
+    const vh = Math.sqrt(vx2 + vy2);
+    if (Math.abs(vh) < 0.1) {
+      this.isPanning = false;
+    }
   };
 }
