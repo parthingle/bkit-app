@@ -48,6 +48,27 @@ export default function ItemScreen(props) {
     );
   }
 
+  async function unbuckItem() {
+    const res = await Client.unbuckItem(item.itemId);
+    if (res.status === 401) {
+      alert("Error authenticating user: " + res.status);
+      props.navigation.navigate("Login");
+      return;
+    } else if (res.status !== 200) {
+      alert("Error unbuckiting item: " + res.status);
+      return;
+    }
+    Alert.alert("Removed", "You removed this bucket list item.", [
+      {
+        text: "Ok",
+        onPress: () => {
+          onRefresh();
+          props.navigation.dispatch(StackActions.pop());
+        }
+      }
+    ]);
+  }
+
   const {
     usersWhoBucketed,
     title,
@@ -87,7 +108,7 @@ export default function ItemScreen(props) {
           style={{
             fontFamily: "Pacifico",
             color: "#67B4B0",
-            fontSize: 28
+            fontSize: 600 / Math.max(20, title.length)
           }}
         >
           {title}
@@ -158,9 +179,8 @@ export default function ItemScreen(props) {
       </ScrollView>
       {
         <Button
-          title={!item.done ? "buck it" : "already bucked!"}
-          disabled={item.done ? true : false}
-          onPress={buckItem}
+          title={!item.done ? "buck it" : "un-buckit"}
+          onPress={item.done ? unbuckItem : buckItem}
           style={{
             bottom: 25
           }}

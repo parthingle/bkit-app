@@ -11,6 +11,15 @@ export default function BuckitDrawer(props) {
   const [offset, setOffset] = useState(0);
   const buckitItems = props.items;
   const { loadUserHome } = props;
+  const categoryToIconMap = {
+    Food: "silverware",
+    Outdoors: "hiking",
+    Shopping: "shopping",
+    "Night Life": "weather-night",
+    Art: "brush",
+    Advocacy: "flower-tulip-outline",
+    UCLA: "school"
+  };
   return (
     <React.Fragment>
       <View
