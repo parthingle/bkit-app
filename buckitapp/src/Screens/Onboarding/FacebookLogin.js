@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import Logo from "../../Components/Logo";
 import Bars from "../../Components/Bars";
 import { LoginManager, AccessToken } from "react-native-fbsdk";
@@ -17,7 +17,7 @@ export default function FacebookLogin(props) {
     const fat = data.accessToken;
     const res = await Client.authFacebook(fat);
     if (res.status !== 200) {
-      alert("Login Failed: " + res.status);
+      Alert.alert("Login Failed", res.errorMessage);
       return;
     }
     props.navigation.navigate("Home");

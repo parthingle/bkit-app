@@ -21,7 +21,7 @@ export default function HomeScreen(props) {
   async function loadUserHome() {
     const res = await Client.userHome();
     if (res.status !== 200) {
-      alert("Error loading Buckit items: " + res.status);
+      Alert.alert("Loading Content Failed", res.errorMessage);
       props.navigation.navigate("Login");
       return;
     }

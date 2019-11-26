@@ -42,7 +42,7 @@ export default function Graph(props) {
   const years = 4;
   const data = [];
   for (let i = 0; i < 12 * years; i++) {
-    const monthIndex = (now.getMonth() - i + (12 * years)) % 12;
+    const monthIndex = (now.getMonth() - i + 12 * years) % 12;
     const year = now.getFullYear() + Math.floor((now.getMonth() - i) / 12);
     if (!counts[year]) {
       counts[year] = {};
@@ -53,9 +53,9 @@ export default function Graph(props) {
     const count = counts[year][monthIndex];
     let month = months[monthIndex];
     if (month == "JAN") {
-      month = month + " '" + year%100;
+      month = month + " '" + (year % 100);
     }
-    data.push({ month, key: i, count });
+    data.push({ month, key: i.toString(), count });
   }
   const [pressedMonth, setPressedMonth] = useState(null);
   const [graphHeight, setGraphHeight] = useState(0);

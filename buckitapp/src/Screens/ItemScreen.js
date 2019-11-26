@@ -6,7 +6,7 @@ import Button from "../Components/Button";
 import ChevronButton from "../Components/ChevronButton";
 import Client from "../Client";
 
-function randomBucketedMessage() {
+function randomBuckMessage() {
   var messages = [
     "You bucked it up!",
     "That was bucking awesome!",
@@ -18,47 +18,40 @@ function randomBucketedMessage() {
   return messages[Math.floor(Math.random() * messages.length)];
 }
 
+function randomUnbuckMessage() {
+  var messages = ["Aww...", "Maybe next time ;)", "Oh well.", "That's too bad"];
+  return messages[Math.floor(Math.random() * messages.length)];
+}
+
 export default function ItemScreen(props) {
   const item = props.navigation.getParam("item");
   const onRefresh = props.navigation.getParam("onRefresh");
 
   async function buckItem() {
     const res = await Client.itemBuck(item.itemId);
-    if (res.status === 401) {
-      alert("Error authenticating user: " + res.status);
-      props.navigation.navigate("Login");
-      return;
-    } else if (res.status !== 200) {
-      alert("Error buckiting item: " + res.status);
+    if (res.status !== 200) {
+      Alert.alert("Failed to buck item", res.errorMessage);
       return;
     }
 
-    Alert.alert(
-      randomBucketedMessage(),
-      "You completed this bucket list item.",
-      [
-        {
-          text: "Ok",
-          onPress: () => {
-            onRefresh();
-            props.navigation.dispatch(StackActions.pop());
-          }
+    Alert.alert(randomBuckMessage(), "You completed this bucket list item.", [
+      {
+        text: "Ok",
+        onPress: () => {
+          onRefresh();
+          props.navigation.dispatch(StackActions.pop());
         }
-      ]
-    );
+      }
+    ]);
   }
 
   async function unbuckItem() {
-    const res = await Client.unbuckItem(item.itemId);
-    if (res.status === 401) {
-      alert("Error authenticating user: " + res.status);
-      props.navigation.navigate("Login");
-      return;
-    } else if (res.status !== 200) {
-      alert("Error unbuckiting item: " + res.status);
+    const res = await Client.itemUnbuck(item.itemId);
+    if (res.status !== 200) {
+      Alert.alert("Failed to unbuck item", res.errorMessage);
       return;
     }
-    Alert.alert("Removed", "You removed this bucket list item.", [
+    Alert.alert(randomUnbuckMessage(), "You removed this bucket list item.", [
       {
         text: "Ok",
         onPress: () => {
