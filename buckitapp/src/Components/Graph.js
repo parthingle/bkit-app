@@ -39,9 +39,10 @@ export default function Graph(props) {
     "DEC"
   ];
 
+  const years = 4;
   const data = [];
-  for (let i = 0; i < 12; i++) {
-    const monthIndex = (now.getMonth() - i + 12) % 12;
+  for (let i = 0; i < 12 * years; i++) {
+    const monthIndex = (now.getMonth() - i + (12 * years)) % 12;
     const year = now.getFullYear() + Math.floor((now.getMonth() - i) / 12);
     if (!counts[year]) {
       counts[year] = {};
@@ -50,8 +51,11 @@ export default function Graph(props) {
       counts[year][monthIndex] = 0;
     }
     const count = counts[year][monthIndex];
-    const month = months[monthIndex];
-    data.push({ month, key: month, count });
+    let month = months[monthIndex];
+    if (month == "JAN") {
+      month = month + " '" + year%100;
+    }
+    data.push({ month, key: i, count });
   }
   const [pressedMonth, setPressedMonth] = useState(null);
 
@@ -120,7 +124,7 @@ const styles = StyleSheet.create({
   },
   barContainer: {
     flex: 1,
-    width: 50,
+    width: 58,
     justifyContent: "flex-end",
     alignItems: "center"
   },
