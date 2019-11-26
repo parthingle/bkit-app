@@ -5,13 +5,10 @@ import AsyncStorage from "@react-native-community/async-storage";
 export default class Client {
   /* REST endpoints */
 
-  static async itemBuck(itemId) {
+  static async itemBuck(itemId, timestamp) {
     return await Client.requestWithAuth({
       method: "post",
-      url: "/item/buck",
-      params: {
-        id: itemId
-      }
+      url: "/item/buck" + `?id=${itemId}&timestamp=${timestamp}`
     });
   }
 

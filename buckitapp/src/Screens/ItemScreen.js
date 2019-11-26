@@ -1,12 +1,19 @@
-import React from "react";
-import { Text, View, Image, ScrollView, Alert } from "react-native";
+import React, { useState } from "react";
+import {
+  Text,
+  View,
+  Image,
+  ScrollView,
+  Alert,
+  DatePickerIOS
+} from "react-native";
 import { StackActions } from "react-navigation";
 import CircleBar from "../Components/CircleBar";
 import Button from "../Components/Button";
 import ChevronButton from "../Components/ChevronButton";
 import Client from "../Client";
 
-function randomBuckMessage() {
+function randomBucketedMessage() {
   var messages = [
     "You bucked it up!",
     "That was bucking awesome!",
@@ -26,23 +33,36 @@ function randomUnbuckMessage() {
 export default function ItemScreen(props) {
   const item = props.navigation.getParam("item");
   const onRefresh = props.navigation.getParam("onRefresh");
+  const [date, setDate] = useState(new Date());
+  const [showDate, toggleShowDate] = useState(false);
+  function toggleShowDateMain() {
+    toggleShowDate(!showDate);
+  }
 
   async function buckItem() {
-    const res = await Client.itemBuck(item.itemId);
-    if (res.status !== 200) {
-      Alert.alert("Failed to buck item", res.errorMessage);
+    const res = await Client.itemBuck(item.itemId, date.getTime());
+    if (res.status === 401) {
+      alert("Error authenticating user: " + res.status);
+      props.navigation.navigate("Login");
+      return;
+    } else if (res.status !== 200) {
+      alert("Error buckiting item: " + res.status);
       return;
     }
 
-    Alert.alert(randomBuckMessage(), "You completed this bucket list item.", [
-      {
-        text: "Ok",
-        onPress: () => {
-          onRefresh();
-          props.navigation.dispatch(StackActions.pop());
+    Alert.alert(
+      randomBucketedMessage(),
+      "You completed this bucket list item.",
+      [
+        {
+          text: "Ok",
+          onPress: () => {
+            onRefresh();
+            props.navigation.dispatch(StackActions.pop());
+          }
         }
-      }
-    ]);
+      ]
+    );
   }
 
   async function unbuckItem() {
@@ -76,7 +96,7 @@ export default function ItemScreen(props) {
   const uri = album[0];
 
   return (
-    <React.Fragment>
+    <View style={{ flex: 1 }}>
       <View
         style={{
           flex: 1,
@@ -123,31 +143,17 @@ export default function ItemScreen(props) {
                 "https://upload.wikimedia.org/wikipedia/commons/a/ad/Royce_Hall_post_rain.jpg"
             }}
           />
-          <CircleBar
-            data={usersWhoBucketed.map(user => {
-              if (user.length < 5) {
-                return "??";
-              }
-              return (
-                ["A", "M", "J", "E", "C", "S", "K", "L", "D"][Number(user[3])] +
-                ["W", "J", "M", "S", "B", "R", "H", "T", "P"][Number(user[4])]
-              );
-            })}
-            style={{
-              marginTop: 10,
-              shadowOpacity: 0.05,
-              shadowRadius: 3
-            }}
-          />
-          <View style={{ padding: 10 }}>
+          <View style={{ padding: 10, top: -20 }}>
             {text.map(([title, content], i) => {
               return (
-                <View key={i} style={{ padding: 5 }}>
+                <View key={i}>
                   <Text
                     style={{
                       fontFamily: "SF Pro Display",
                       fontSize: 26,
-                      color: "#67B4B0"
+                      color: "#67B4B0",
+                      paddingTop: 20,
+                      paddingBottom: 10
                     }}
                   >
                     {title}
@@ -157,8 +163,7 @@ export default function ItemScreen(props) {
                       fontFamily: "SF Pro Display",
                       fontSize: 16,
                       color: "#767676",
-                      lineHeight: 20,
-                      padding: 5
+                      lineHeight: 20
                     }}
                   >
                     {content}
@@ -167,23 +172,28 @@ export default function ItemScreen(props) {
               );
             })}
           </View>
-          <View style={{ width: "100%", height: 40 }}></View>
+          <View style={{ height: 50 }} />
         </ScrollView>
-      </View>
-      <View
-        style={{
-          flex: 1,
-          width: "100%",
-          position: "absolute",
-          bottom: 10,
-          alignItems: "center"
-        }}
-      >
         <Button
-          title={!item.done ? "buck it" : "unbuck it"}
+          title={!item.done ? "buck it" : "un-buckit"}
           onPress={item.done ? unbuckItem : buckItem}
+          style={{
+            bottom: 25
+          }}
+          done={item.done}
+          toggleShowDate={toggleShowDateMain}
         />
       </View>
-    </React.Fragment>
+      {showDate ? (
+        <DatePickerIOS
+          maximumDate={new Date()}
+          onDateChange={setDate}
+          date={date}
+          mode="date"
+        />
+      ) : (
+        <View />
+      )}
+    </View>
   );
 }
