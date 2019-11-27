@@ -8,7 +8,7 @@ export default function CircleBar(props) {
   const circles = data.slice(0, maxSize - 1);
   const diff = data.length - circles.length;
   if (diff > 0) {
-    circles.push("+" + diff);
+    circles.push("+" + Math.min(diff, 9));
   }
   return (
     <View style={[styles.container, props.style]}>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "SF Pro Text",
-    fontSize: 25,
+    fontSize: 22,
     textAlign: "center",
     color: "#FEFDF4"
   },

@@ -124,12 +124,12 @@ export default function ItemScreen(props) {
         />
         <CircleBar
           data={usersWhoBucketed.map(user => {
-            if (user.length < 2) {
+            if (user.length < 5) {
               return "??";
             }
             return (
-              String.fromCharCode(65 + Number(user[0])) +
-              String.fromCharCode(65 + Number(user[1]))
+              ["A", "M", "J", "E", "C", "S", "K", "L", "D"][Number(user[3])] +
+              ["W", "J", "M", "S", "B", "R", "H", "T", "P"][Number(user[4])]
             );
           })}
           style={{
