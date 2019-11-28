@@ -1,5 +1,6 @@
 import React from "react";
 import { View } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 export default function Checkmark(props) {
   if (props.done) {
@@ -9,55 +10,29 @@ export default function Checkmark(props) {
           {
             marginRight: 14,
             backgroundColor: "#FDAF80",
-            borderRadius: 25/2,
+            borderRadius: 25 / 2,
             height: 25,
             width: 25,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
           },
           props.style
         ]}
       >
-      <View
-        style={[
-          {
-            position: 'relative'
-          },
-          props.style
-        ]}>
         <View
-            style={[
-              { 
-                position: 'absolute',
-                left: -1,
-                bottom: -7,
-                transform: [{rotate: '45deg'}],
-                rotate: 45,
-                width: 5,
-                height: 14,
-                backgroundColor: 'white',
-              },
-              props.style
-            ]}>
-          </View>
-          <View
-            style={[
-              { 
-                position: 'absolute',
-                left: -7,
-                bottom: -3,
-                transform: [{rotate: '-45deg'}],
-                width: 5,
-                height: 5,
-                backgroundColor: 'white',
-              },
-              props.style
-            ]}/>
+          style={[
+            {
+              position: "relative"
+            },
+            props.style
+          ]}
+        >
+          <Icon name="check" size={16} color="#FFF" />
         </View>
       </View>
     );
   } else {
-    return (<View/>);
+    return <View />;
   }
 }

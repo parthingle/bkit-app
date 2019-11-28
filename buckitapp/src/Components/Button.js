@@ -7,6 +7,8 @@ export default function Button(props) {
       disabled={props.disabled}
       onPress={props.onPress}
       style={{
+        height: 60,
+        width: 160,
         shadowOffset: { width: 0.3, height: 0.3 },
         shadowOpacity: 0.25
       }}
@@ -16,8 +18,6 @@ export default function Button(props) {
           {
             backgroundColor: "#FDB17F",
             borderRadius: 5,
-            paddingLeft: 20,
-            paddingRight: 20,
             height: 50,
             textAlignment: "center",
             justifyContent: "center",

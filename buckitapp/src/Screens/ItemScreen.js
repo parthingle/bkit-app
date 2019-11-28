@@ -76,109 +76,114 @@ export default function ItemScreen(props) {
   const uri = album[0];
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "#FEFDF4",
-        alignItems: "center"
-      }}
-    >
+    <React.Fragment>
       <View
         style={{
-          width: "100%",
-          height: 100,
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexDirection: "row",
-          shadowRadius: 30,
-          paddingTop: 35,
-          paddingLeft: 10,
-          paddingRight: 10
+          flex: 1,
+          backgroundColor: "#FEFDF4",
+          alignItems: "center"
         }}
       >
-        <ChevronButton onPress={() => props.navigation.goBack()} />
-        <Text
+        <View
           style={{
-            fontFamily: "Pacifico",
-            color: "#67B4B0",
-            fontSize: 600 / Math.max(20, title.length)
+            width: "100%",
+            height: 100,
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexDirection: "row",
+            shadowRadius: 30,
+            paddingTop: 35,
+            paddingLeft: 10,
+            paddingRight: 10
           }}
         >
-          {title}
-        </Text>
-        <Text style={{ fontSize: 30, opacity: 0 }}>⇦</Text>
-      </View>
-      <ScrollView
-        style={{ width: "100%" }}
-        horizontal={false}
-        showsVerticalScrollIndicator={false}
-        overScrollMode="never"
-      >
-        <Image
-          style={{ width: "100%", height: 300 }}
-          source={{
-            uri:
-              uri ||
-              "https://upload.wikimedia.org/wikipedia/commons/a/ad/Royce_Hall_post_rain.jpg"
-          }}
-        />
-        <CircleBar
-          data={usersWhoBucketed.map(user => {
-            if (user.length < 5) {
-              return "??";
-            }
-            return (
-              ["A", "M", "J", "E", "C", "S", "K", "L", "D"][Number(user[3])] +
-              ["W", "J", "M", "S", "B", "R", "H", "T", "P"][Number(user[4])]
-            );
-          })}
-          style={{
-            marginTop: 10,
-            marginBottom: 10,
-            shadowOpacity: 0.05,
-            shadowRadius: 3
-          }}
-        />
-        <View style={{ padding: 10, top: -20 }}>
-          {text.map(([title, content], i) => {
-            return (
-              <View key={i}>
-                <Text
-                  style={{
-                    fontFamily: "SF Pro Display",
-                    fontSize: 26,
-                    color: "#67B4B0",
-                    paddingTop: 20,
-                    paddingBottom: 10
-                  }}
-                >
-                  {title}
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: "SF Pro Display",
-                    fontSize: 16,
-                    color: "#767676",
-                    lineHeight: 20
-                  }}
-                >
-                  {content}
-                </Text>
-              </View>
-            );
-          })}
+          <ChevronButton onPress={() => props.navigation.goBack()} />
+          <Text
+            style={{
+              fontFamily: "Pacifico",
+              color: "#67B4B0",
+              fontSize: 600 / Math.max(20, title.length)
+            }}
+          >
+            {title}
+          </Text>
+          <Text style={{ fontSize: 30, opacity: 0 }}>⇦</Text>
         </View>
-        <View style={{ height: 50 }} />
-      </ScrollView>
-      {
+        <ScrollView
+          style={{ width: "100%" }}
+          horizontal={false}
+          showsVerticalScrollIndicator={false}
+          overScrollMode="never"
+        >
+          <Image
+            style={{ width: "100%", height: 300 }}
+            source={{
+              uri:
+                uri ||
+                "https://upload.wikimedia.org/wikipedia/commons/a/ad/Royce_Hall_post_rain.jpg"
+            }}
+          />
+          <CircleBar
+            data={usersWhoBucketed.map(user => {
+              if (user.length < 5) {
+                return "??";
+              }
+              return (
+                ["A", "M", "J", "E", "C", "S", "K", "L", "D"][Number(user[3])] +
+                ["W", "J", "M", "S", "B", "R", "H", "T", "P"][Number(user[4])]
+              );
+            })}
+            style={{
+              marginTop: 10,
+              shadowOpacity: 0.05,
+              shadowRadius: 3
+            }}
+          />
+          <View style={{ padding: 10 }}>
+            {text.map(([title, content], i) => {
+              return (
+                <View key={i} style={{ padding: 5 }}>
+                  <Text
+                    style={{
+                      fontFamily: "SF Pro Display",
+                      fontSize: 26,
+                      color: "#67B4B0"
+                    }}
+                  >
+                    {title}
+                  </Text>
+                  <Text
+                    style={{
+                      fontFamily: "SF Pro Display",
+                      fontSize: 16,
+                      color: "#767676",
+                      lineHeight: 20,
+                      padding: 5
+                    }}
+                  >
+                    {content}
+                  </Text>
+                </View>
+              );
+            })}
+          </View>
+          <View style={{ width: "100%", height: 40 }}></View>
+        </ScrollView>
+      </View>
+      <View
+        style={{
+          flex: 1,
+          width: "100%",
+          position: "absolute",
+          bottom: 10,
+          alignItems: "center"
+        }}
+      >
         <Button
-          title={!item.done ? "buck it" : "un-buckit"}
+          title={!item.done ? "buck it" : "unbuck it"}
           onPress={item.done ? unbuckItem : buckItem}
-          style={{
-            bottom: 25
-          }}
         />
-      }
-    </View>
+      </View>
+    </React.Fragment>
   );
 }
