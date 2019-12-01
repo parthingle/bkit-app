@@ -21,6 +21,7 @@ export default function FacebookLogin(props) {
     const res = await Client.authFacebook(fat);
     if (res.status !== 200) {
       Alert.alert("Login Failed", res.errorMessage);
+      setLoading(false);
       return;
     }
     props.navigation.navigate("Home");

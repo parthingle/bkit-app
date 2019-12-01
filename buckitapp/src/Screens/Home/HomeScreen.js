@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Alert, DatePickerIOS } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import LoadingBar from "../../Components/LoadingBar";
 import Logo from "../../Components/Logo";
 import Graph from "../../Components/Graph";
