@@ -14,7 +14,7 @@ import SquareButton from "../Components/SquareButton";
 import ChevronButton from "../Components/ChevronButton";
 import Client from "../Client";
 
-function randomBuckMessage() {
+function randomBuckitMessage() {
   var messages = [
     "You bucked it up!",
     "That was bucking awesome!",
@@ -26,7 +26,7 @@ function randomBuckMessage() {
   return messages[Math.floor(Math.random() * messages.length)];
 }
 
-function randomUnbuckMessage() {
+function randomUnbuckitMessage() {
   var messages = ["Aww...", "Maybe next time ;)", "Oh well.", "That's too bad"];
   return messages[Math.floor(Math.random() * messages.length)];
 }
@@ -50,7 +50,7 @@ export default function ItemScreen(props) {
       return;
     }
 
-    Alert.alert(randomBuckMessage(), "You completed this bucket list item.", [
+    Alert.alert(randomBuckitMessage(), "You completed this bucket list item.", [
       {
         text: "Ok",
         onPress: () => {
@@ -67,7 +67,7 @@ export default function ItemScreen(props) {
       Alert.alert("Failed to unbuckit item", res.errorMessage);
       return;
     }
-    Alert.alert(randomUnbuckMessage(), "You removed this bucket list item.", [
+    Alert.alert(randomUnbuckitMessage(), "You removed this bucket list item.", [
       {
         text: "Ok",
         onPress: () => {
