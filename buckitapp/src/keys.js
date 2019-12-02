@@ -1,4 +1,4 @@
-const env = "DEV";
+const env = "BETA";
 export default env === "BETA"
   ? {
       BASE_URL:

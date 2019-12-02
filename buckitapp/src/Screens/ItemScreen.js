@@ -139,22 +139,6 @@ export default function ItemScreen(props) {
                 "https://upload.wikimedia.org/wikipedia/commons/a/ad/Royce_Hall_post_rain.jpg"
             }}
           />
-          <CircleBar
-            data={usersWhoBucketed.map(user => {
-              if (user.length < 5) {
-                return "??";
-              }
-              return (
-                ["A", "M", "J", "E", "C", "S", "K", "L", "D"][Number(user[3])] +
-                ["W", "J", "M", "S", "B", "R", "H", "T", "P"][Number(user[4])]
-              );
-            })}
-            style={{
-              marginTop: 10,
-              shadowOpacity: 0.05,
-              shadowRadius: 3
-            }}
-          />
           <View style={{ padding: 10 }}>
             {text.map(([title, content], i) => {
               return (
