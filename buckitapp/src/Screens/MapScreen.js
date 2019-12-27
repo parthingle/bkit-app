@@ -1,5 +1,13 @@
 import React, { useState, useRef } from "react";
-import { View, Alert, StyleSheet, Text, DatePickerIOS } from "react-native";
+import {
+  View,
+  Alert,
+  StyleSheet,
+  Text,
+  DatePickerIOS,
+  Dimensions,
+  ScrollView
+} from "react-native";
 import { StackActions } from "react-navigation";
 import ChevronButton from "../Components/ChevronButton";
 import MapboxGL from "@react-native-mapbox-gl/maps";
@@ -8,6 +16,7 @@ import Client from "../Client";
 import Button from "../Components/Button";
 import SquareButton from "../Components/SquareButton";
 
+const { height, width } = Dimensions.get("window");
 function randomBuckitMessage() {
   var messages = [
     "You bucked it up!",
@@ -48,14 +57,18 @@ export default function MapScreen(props) {
     setShowDate(false);
     setDate(new Date());
 
-    Alert.alert(randomBuckitMessage(), `You completed this bucket list item.`, [
-      {
-        text: "Ok",
-        onPress: () => {
-          carouselRef.current.snapToNext();
+    Alert.alert(
+      randomBuckitMessage(),
+      `You completed this bucket list itemt.`,
+      [
+        {
+          text: "Ok",
+          onPress: () => {
+            carouselRef.current.snapToNext();
+          }
         }
-      }
-    ]);
+      ]
+    );
   }
 
   async function unbuckItem(itemId) {
@@ -86,7 +99,7 @@ export default function MapScreen(props) {
         style={{
           flex: 1,
           backgroundColor: "#FEFDF4",
-          height: 150,
+          height: height * 0.3,
           paddingTop: "3%",
           borderRadius: 10,
           shadowOpacity: 0.5,
@@ -96,31 +109,45 @@ export default function MapScreen(props) {
         <Text
           style={{
             paddingLeft: 25,
+            paddingRight: 25,
             fontFamily: "Pacifico",
             fontWeight: "bold",
-            fontSize: 16
+            fontSize: 480 / Math.max(20, item.title.length),
+            alignContent: "center"
           }}
         >
           {item.title}
         </Text>
-        <Text style={{ paddingLeft: 25, fontFamily: "SF Pro Display" }}>
-          {item.content.description.slice(0, 200) + "..."}
-        </Text>
+        <View style={{ paddingBottom: "5%", height: height * 0.155 }}>
+          <ScrollView>
+            <Text
+              style={{
+                paddingLeft: 25,
+                fontSize: 300 / Math.max(20, item.title.length) + 1,
+                fontFamily: "SF Pro Display",
+                paddingRight: 25
+              }}
+            >
+              {item.content.description.slice(0, 300)}
+              {item.content.description.length > 300 ? "..." : ""}
+            </Text>
+          </ScrollView>
+        </View>
+
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "center",
-            alignContent: "center",
+
             position: "absolute",
-            bottom: "5%",
-            left: "30%"
+            bottom: "7%",
+            left: item.done ? "32.5%" : "27.5%"
           }}
         >
           <Button
             title={!item.done ? "buckit" : "un-buckit"}
             onPress={item.done ? unbuckItem : buckItem}
-            height={25}
-            width={100}
+            height={35}
+            width={120}
             fontSize={12}
           />
           {!item.done ? (
@@ -128,8 +155,8 @@ export default function MapScreen(props) {
               onPress={toggleShowDate}
               icon={showDate ? "x" : "clock"}
               iconSize={12}
-              height={25}
-              width={25}
+              height={35}
+              width={35}
             />
           ) : null}
         </View>
@@ -231,7 +258,8 @@ const styles = StyleSheet.create({
   carousel: {
     position: "absolute",
     bottom: "5%",
-    paddingLeft: "3%"
+    paddingLeft: "3%",
+    paddingRight: "3%"
   },
   safeArea: {
     flex: 1,
