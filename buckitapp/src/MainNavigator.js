@@ -1,5 +1,6 @@
 import Home from "./Screens/Home/HomeScreen";
 import ItemScreen from "./Screens/ItemScreen";
+import MapScreen from "./Screens/MapScreen";
 import { createStackNavigator } from "react-navigation";
 
 const AppTab = createStackNavigator(
@@ -9,6 +10,9 @@ const AppTab = createStackNavigator(
     },
     ItemScreen: {
       screen: ItemScreen
+    },
+    MapScreen: {
+      screen: MapScreen
     }
   },
   {

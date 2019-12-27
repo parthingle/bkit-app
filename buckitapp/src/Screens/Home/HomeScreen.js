@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Alert } from "react-native";
+import Icon from "react-native-vector-icons/Feather";
 import LoadingBar from "../../Components/LoadingBar";
 import Logo from "../../Components/Logo";
 import Graph from "../../Components/Graph";
 import ChevronButton from "../../Components/ChevronButton";
 import Client from "../../Client";
 import BuckitDrawer from "../../Components/BuckitDrawer";
+import MapButton from "../../Components/MapButton";
 
 export default function HomeScreen(props) {
   const [buckitItems, setBuckitItems] = useState([]);
@@ -58,11 +60,20 @@ export default function HomeScreen(props) {
               bottom: -15
             }}
           />
-          <View
+          <MapButton
             style={{
-              height: 10,
-              width: 10
+              transform: [{ rotate: "180deg" }],
+              left: 40,
+              top: 15,
+              opacity: 1
             }}
+            icon="map"
+            onPress={() =>
+              props.navigation.navigate("MapScreen", {
+                items: buckitItems,
+                onRefresh: loadUserHome
+              })
+            }
           />
         </View>
         <LoadingBar percent={percentDone} />
