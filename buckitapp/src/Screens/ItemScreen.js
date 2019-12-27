@@ -8,7 +8,6 @@ import {
   DatePickerIOS
 } from "react-native";
 import { StackActions } from "react-navigation";
-import CircleBar from "../Components/CircleBar";
 import Button from "../Components/Button";
 import SquareButton from "../Components/SquareButton";
 import ChevronButton from "../Components/ChevronButton";

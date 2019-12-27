@@ -10,8 +10,8 @@ export default function SquareButton(props) {
           {
             backgroundColor: "#FDB17F",
             borderRadius: 5,
-            height: 50,
-            width: 50,
+            height: props.height || 50,
+            width: props.width || 50,
             justifyContent: "center",
             alignItems: "center",
             marginLeft: 10
@@ -19,7 +19,11 @@ export default function SquareButton(props) {
           props.style
         ]}
       >
-        <Icon style={{ color: "white" }} size={25} name={props.icon} />
+        <Icon
+          style={{ color: "white" }}
+          size={props.iconSize || 25}
+          name={props.icon}
+        />
       </View>
     </TouchableOpacity>
   );
