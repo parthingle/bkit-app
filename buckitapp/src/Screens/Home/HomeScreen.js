@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Alert } from "react-native";
-import Icon from "react-native-vector-icons/Feather";
+import AsyncStorage from "@react-native-community/async-storage";
 import LoadingBar from "../../Components/LoadingBar";
 import Logo from "../../Components/Logo";
 import Graph from "../../Components/Graph";
@@ -48,6 +48,8 @@ export default function HomeScreen(props) {
                   text: "Log Out",
                   style: "destructive",
                   onPress: () => {
+                    AsyncStorage.removeItem("@jwtoken");
+                    AsyncStorage.removeItem("@rtoken");
                     props.navigation.navigate("Login");
                   }
                 }

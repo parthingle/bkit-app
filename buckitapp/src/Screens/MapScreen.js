@@ -29,7 +29,10 @@ function randomBuckitMessage() {
   return messages[Math.floor(Math.random() * messages.length)];
 }
 
-function randomUnbuckitMessage() {}
+function randomUnbuckitMessage() {
+  var messages = ["Aww...", "Maybe next time ;)", "Oh well.", "That's too bad"];
+  return messages[Math.floor(Math.random() * messages.length)];
+}
 
 export default function MapScreen(props) {
   const onRefresh = props.navigation.getParam("onRefresh");
@@ -71,19 +74,20 @@ export default function MapScreen(props) {
     );
   }
 
-  async function unbuckItem(itemId) {
-    const res = await Client.itemUnbuck(itemId);
+  async function unbuckItem() {
+    const res = await Client.itemUnbuck(items[index].itemId);
     if (res.status !== 200) {
       Alert.alert("Failed to unbuckit item", res.errorMessage);
       return;
     }
+    const newItems = items;
+    newItems[index].done = false;
+    setItems(newItems);
+    setShowDate(false);
+    setDate(new Date());
     Alert.alert(randomUnbuckitMessage(), "You removed this bucket list item.", [
       {
-        text: "Ok",
-        onPress: () => {
-          onRefresh();
-          props.navigation.dispatch(StackActions.pop());
-        }
+        text: "Ok"
       }
     ]);
   }
@@ -113,7 +117,8 @@ export default function MapScreen(props) {
             fontFamily: "Pacifico",
             fontWeight: "bold",
             fontSize: 480 / Math.max(20, item.title.length),
-            alignContent: "center"
+            alignContent: "center",
+            color: "#67B4B0"
           }}
         >
           {item.title}
@@ -204,12 +209,12 @@ export default function MapScreen(props) {
         <Carousel
           ref={carouselRef}
           renderItem={this._renderItem.bind(this)}
-          sliderWidth={350}
-          itemWidth={350}
+          sliderWidth={325}
+          itemWidth={325}
           data={items}
           loop={true}
-          layout="tinder"
-          layoutCardOffset={9}
+          layout="default"
+          layoutCardOffset={0}
           containerCustomStyle={styles.slider}
           contentContainerCustomStyle={styles.sliderContentContainer}
           onBeforeSnapToItem={idx => {
