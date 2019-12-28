@@ -8,14 +8,14 @@ export default class Client {
   static async itemBuck(id, timestamp) {
     return await Client.requestWithAuth({
       method: "post",
-      url: `/item/buck/${id}?timestamp=${timestamp}`
+      url: `/item/buck/?id=${id}&timestamp=${timestamp}`
     });
   }
 
   static async itemUnbuck(itemId) {
     return await Client.requestWithAuth({
       method: "post",
-      url: `/item/unbuck/${itemId}`
+      url: `/item/unbuck?id=${itemId}`
     });
   }
   static async userHome() {
