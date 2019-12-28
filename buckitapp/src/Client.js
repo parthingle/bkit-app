@@ -8,8 +8,7 @@ export default class Client {
   static async itemBuck(id, timestamp) {
     return await Client.requestWithAuth({
       method: "post",
-      url: "/item/buck",
-      params: { id, timestamp }
+      url: `/item/buck/${id}?timestamp=${timestamp}`
     });
   }
 
