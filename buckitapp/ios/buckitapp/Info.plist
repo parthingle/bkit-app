@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>14</string>
 	<key>FacebookAppID</key>
 	<string>765646803828688</string>
 	<key>FacebookDisplayName</key>
@@ -61,6 +61,8 @@
 	<string>Allow permission to use the Camera to Buckit new items</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allow permission to use Location Data to geotag your Buckit</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We only use your location to show you your relative distance from the places shown in Buckit</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Your message to user when the microphone is accessed for the first time</string>
 	<key>NSPhotoLibraryUsageDescription</key>

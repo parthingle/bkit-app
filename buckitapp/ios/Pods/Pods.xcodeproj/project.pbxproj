@@ -1597,13 +1597,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F07C961D3F18DD421D178D60414AA2EA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -2896,28 +2889,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		40EB76C25BDDB6F65078EB68F7B46B89 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CAD9F319AF36E7CB5E6585B667917750 /* CompactValue.h in Headers */,
-				366B32EDF088C05D5B9FB7B8B74C3611 /* instrumentation.h in Headers */,
-				FC43396294D58F1030FED8DA0D988325 /* Utils.h in Headers */,
-				E17A99CD2B0F23EF66F04D62BFDC6A79 /* YGConfig.h in Headers */,
-				1D756E6C7A1B3ACF83D6D5E2EFF78E8F /* YGEnums.h in Headers */,
-				F6C7F607B212A43D5610F99D73CF5F40 /* YGFloatOptional.h in Headers */,
-				6B6B8A656F05DACA61D5AF9416982BCA /* YGLayout.h in Headers */,
-				E8B80A59E10180A86121793B68D63BC0 /* YGMacros.h in Headers */,
-				2BB34425DAE042A0420B3A76D64F05B5 /* YGMarker.h in Headers */,
-				2B2C001C3838450DAD2DA22C4F0306E1 /* YGNode.h in Headers */,
-				82F7E25EEBAD2AC67E04CE4581D3026C /* YGNodePrint.h in Headers */,
-				5D65296E77120D698621C818BF3CCD99 /* YGStyle.h in Headers */,
-				1D58BCA1728A856501337E92612660B9 /* YGValue.h in Headers */,
-				6BD913630D1C131E89634F2F585D43D2 /* Yoga-internal.h in Headers */,
-				BEC33922AFDBF74CDD431D4CB6FFF2F2 /* Yoga.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		4742C81E1EF7090967BC5901E70A88C2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -3182,23 +3153,6 @@
 			productReference = 06489499588BFA8FD5E63DD6375CD533 /* libFolly.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		D0B273D56D6C8A0C770E79BE693CE2EE /* yoga */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9DE0C11AF4F2321DE6920FB54513235B /* Build configuration list for PBXNativeTarget "yoga" */;
-			buildPhases = (
-				40EB76C25BDDB6F65078EB68F7B46B89 /* Headers */,
-				191080EA046EF539AC72DB04E3CCF1C5 /* Sources */,
-				F07C961D3F18DD421D178D60414AA2EA /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = yoga;
-			productName = yoga;
-			productReference = 1FA65622A09E4E5504F80B3610AB78F1 /* libyoga.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		D0EFEFB685D97280256C559792236873 /* glog */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DD0690375E475E04D44DEDC55D553B0E /* Build configuration list for PBXNativeTarget "glog" */;
@@ -3247,7 +3201,6 @@
 				519FEB34B0F58B08680BBE4780AFD923 /* Pods-buckitapp-tvOSTests */,
 				0CA1D6F5CA435315835845907BC7E2A1 /* Pods-buckitappTests */,
 				97D923370E60A5C762798E76A69EBCB7 /* react-native-mapbox-gl */,
-				D0B273D56D6C8A0C770E79BE693CE2EE /* yoga */,
 			);
 		};
 /* End PBXProject section */
@@ -3258,24 +3211,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				75A00B2EDB5EF4F8D57D9B4FACD46513 /* Pods-buckitapp-tvOS-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		191080EA046EF539AC72DB04E3CCF1C5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				47685FB4099A615ECA6C1AD1988DCBAC /* Utils.cpp in Sources */,
-				A5E17361F07041D94AE372192B8FD915 /* YGConfig.cpp in Sources */,
-				3E819FE602ADE5FE3B895789A27E68A8 /* YGEnums.cpp in Sources */,
-				70B1039EA5C6BE6D0E02E6E71CA1D92E /* YGLayout.cpp in Sources */,
-				7FFEAB905ECAC9C9738602D576FF4022 /* YGMarker.cpp in Sources */,
-				7D7E1539C015363C4C6AD904D73C811E /* YGNode.cpp in Sources */,
-				06A7B68E847B27A18F5DD07C9F78324F /* YGNodePrint.cpp in Sources */,
-				59D4A1E8DB3EC806FF8FD610C6507992 /* YGStyle.cpp in Sources */,
-				FD08BCC6C071AF594E41647CA9C93F43 /* YGValue.cpp in Sources */,
-				B3B71BECCC50587AFB852A03EA360295 /* yoga-dummy.m in Sources */,
-				AFD751A55D6063D196C6489644B0A7D6 /* Yoga.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3447,7 +3382,6 @@
 		2C031233B792EF813E73C0423547BF2B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = yoga;
-			target = D0B273D56D6C8A0C770E79BE693CE2EE /* yoga */;
 			targetProxy = 114F7D9D49C1B464DA5B7B86346D0F83 /* PBXContainerItemProxy */;
 		};
 		40796B10551B1D266F45BFE59409EA93 /* PBXTargetDependency */ = {
@@ -3482,7 +3416,6 @@
 		967E3C2BBD1E56370A4367C3666E4772 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = yoga;
-			target = D0B273D56D6C8A0C770E79BE693CE2EE /* yoga */;
 			targetProxy = 1D03F17F7291170F11D780FD194A59ED /* PBXContainerItemProxy */;
 		};
 		9AC50941FA984B2662455FCCF943B2C7 /* PBXTargetDependency */ = {
@@ -4211,15 +4144,6 @@
 			buildConfigurations = (
 				A53595BE9DB33C0D17071A387583A62F /* Debug */,
 				5BAD5D184119D288510D1C1FEF029E69 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9DE0C11AF4F2321DE6920FB54513235B /* Build configuration list for PBXNativeTarget "yoga" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				94D01EC7043D4090458E8EFCA29EADF6 /* Debug */,
-				6840732C704B47045096A65CDD7C89A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
